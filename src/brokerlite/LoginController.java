@@ -48,7 +48,7 @@ public class LoginController implements Initializable {
 				primaryStage.setTitle("Broker Lite");
 				primaryStage.getIcons().add(new Image("/img/icon.png"));
 				primaryStage.setMinHeight(600);
-				primaryStage.setMinWidth(600);
+				primaryStage.setMinWidth(1000);
 				
 				FXMLLoader loader = new FXMLLoader();
 				Pane root = loader.load(getClass().getResource("/brokerlite/MainPage.fxml").openStream());
@@ -72,5 +72,6 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

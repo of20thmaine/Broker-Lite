@@ -14,8 +14,9 @@ public class Main extends Application {
 		try {
 			primaryStage.setTitle("Broker Lite");
 			primaryStage.getIcons().add(new Image("/img/icon.png"));
-			primaryStage.setMinHeight(600);
+			primaryStage.setMinHeight(800);
 			primaryStage.setMinWidth(600);
+			primaryStage.setResizable(false);
 			
 			Parent root = FXMLLoader.load(getClass().getResource("/brokerlite/Login.fxml"));
 			Scene scene = new Scene(root);
