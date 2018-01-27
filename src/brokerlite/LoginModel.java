@@ -9,9 +9,11 @@ public class LoginModel {
 	
 	public LoginModel() {
 		connection = SqlConnect.connector();
+
 		if(connection == null) {
 			System.exit(1);
 		}
+	
 	}
 	
 	public boolean isDbConnected() {
