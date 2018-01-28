@@ -5,7 +5,7 @@ import java.sql.*;
 public class LoginModel {
 	
 	private Connection connection;
-	private String userData = "";
+	private String[] userData;
 	
 	public LoginModel() {
 		connection = SqlConnect.connector();
@@ -38,9 +38,10 @@ public class LoginModel {
 			resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
+				String userName = resultSet.getString(1);
 				String firstName = resultSet.getString(3);
 				String lastName = resultSet.getString(4);
-				this.userData = firstName + " " + lastName;
+				this.userData = new String[] {userName, firstName, lastName};
 				return true;
 			} else {
 				return false;
@@ -54,7 +55,7 @@ public class LoginModel {
 		}
 	}
 	
-	public String getUser() {
+	public String[] getUser() {
 		return userData;
 	}
 

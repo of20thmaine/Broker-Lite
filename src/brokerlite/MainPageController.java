@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class MainPageController implements Initializable {
 	
+	private String[] userData;
 	@FXML
 	private Label userLabel;
 	@FXML
@@ -31,8 +32,12 @@ public class MainPageController implements Initializable {
 		hbox.setHgrow(menu, Priority.ALWAYS);
 	}
 	
-	public void getUserWelcome(String user) {
-		userLabel.setText("Welcome " + user + "!");
+	public void setUser(String[] userData) {
+		this.userData = userData;
+	}
+	
+	public void displayUser() {
+		userLabel.setText("Welcome " + userData[1] + " " + userData[2] + "!");
 	}
 	
 	public void userSignOut(ActionEvent event) {

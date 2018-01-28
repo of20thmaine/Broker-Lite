@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="login-pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.LoginController">
+<AnchorPane id="login-pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.LoginController">
    <children>
       <TextField fx:id="userName" layoutX="134.0" layoutY="339.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="332.0" promptText="Username" snapToPixel="false">
          <font>
@@ -21,7 +21,7 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Button id="login-button" layoutX="236.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="129.0" stylesheets="@application.css" text="Login">
+      <Button id="login-button" layoutX="236.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="129.0" text="Login">
          <font>
             <Font size="18.0" />
          </font>

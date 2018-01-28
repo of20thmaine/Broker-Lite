@@ -40,7 +40,7 @@ public class LoginController implements Initializable {
 		try {
 			if(loginModel.isLogin(userName.getText(), userPassword.getText())) {
 				isConnected.setText("Login Succesful");
-				String user = loginModel.getUser();
+				String[] userData = loginModel.getUser();
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
 				
@@ -53,7 +53,9 @@ public class LoginController implements Initializable {
 				FXMLLoader loader = new FXMLLoader();
 				Pane root = loader.load(getClass().getResource("/brokerlite/MainPage.fxml").openStream());
 				MainPageController mainPageController = (MainPageController)loader.getController();
-				mainPageController.getUserWelcome(user);
+				
+				mainPageController.setUser(userData);
+				mainPageController.displayUser();
 				
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
