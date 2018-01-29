@@ -53,16 +53,13 @@ public class LoginController implements Initializable {
 				FXMLLoader loader = new FXMLLoader();
 				Pane root = loader.load(getClass().getResource("/brokerlite/MainPage.fxml").openStream());
 				MainPageController mainPageController = (MainPageController)loader.getController();
-				
-				mainPageController.setUser(userData);
-				mainPageController.displayUser();
-				
+
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				
 				primaryStage.show();
-				
+				mainPageController.postInitialize(userData);
 				
 			} else {
 				isConnected.setText("Username or Password is not correct.");

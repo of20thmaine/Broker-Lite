@@ -8,9 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 
 public class MainPageController implements Initializable {
 	
+	private String[] testStocks = new String[]{"AAPL", "AMZN", "GOOG", "ORCL", "MSFT"};
 	private String[] userData;
 	@FXML
 	private Label userLabel;
@@ -25,19 +28,33 @@ public class MainPageController implements Initializable {
 	private MenuBar menu;
 	@FXML
 	private HBox hbox;
+	@FXML
+	private GridPane gridPane;
 
-	@SuppressWarnings("static-access")
 	@Override
-	public void initialize(URL location, ResourceBundle resources) { 
-		hbox.setHgrow(menu, Priority.ALWAYS);
-	}
+	public void initialize(URL location, ResourceBundle resources) { }
 	
-	public void setUser(String[] userData) {
+	public void postInitialize(String[] userData) {
+		HBox.setHgrow(menu, Priority.ALWAYS);
 		this.userData = userData;
+		this.displayUser();
+		this.displayLiveQuotes();
 	}
 	
-	public void displayUser() {
+	private void displayUser() {
 		userLabel.setText("Welcome " + userData[1] + " " + userData[2] + "!");
+	}
+	
+	private void displayLiveQuotes() {
+		gridPane.getChildren().clear();
+		for(int i = 0; i < testStocks.length; i++) {
+			StockQuote s = StockController.getStockQuote(testStocks[i]);
+			
+			Button button = new Button();
+			button.setText(s.getSymbol() + "\n" + s.getLastPrice());
+			
+			gridPane.add(button, i, 0);
+		}
 	}
 	
 	public void userSignOut(ActionEvent event) {
