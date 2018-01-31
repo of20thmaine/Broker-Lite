@@ -51,11 +51,11 @@ public class LoginController implements Initializable {
 				primaryStage.setMinWidth(1000);
 				
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/brokerlite/MainPage.fxml").openStream());
+				Pane root = loader.load(getClass().getResource("/FXML/MainPage.fxml").openStream());
 				MainPageController mainPageController = (MainPageController)loader.getController();
 
 				Scene scene = new Scene(root);
-				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 				primaryStage.setScene(scene);
 				
 				primaryStage.show();

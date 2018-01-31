@@ -18,9 +18,9 @@ public class Main extends Application {
 			primaryStage.setMinWidth(600);
 			primaryStage.setResizable(false);
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/brokerlite/Login.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/FXML/Login.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();

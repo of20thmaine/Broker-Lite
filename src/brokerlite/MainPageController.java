@@ -1,7 +1,10 @@
 package brokerlite;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,17 +14,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainPageController implements Initializable {
 	
-	private String[] testStocks = new String[]{"AAPL", "AMZN", "GOOG", "ORCL", "MSFT"};
 	private String[] userData;
+	private ArrayList<Customer> customers;
+	private CustomerModel customerModel = new CustomerModel();
+	
+	@FXML
+	private Label isConnected;
 	@FXML
 	private Label userLabel;
 	@FXML
@@ -30,30 +40,50 @@ public class MainPageController implements Initializable {
 	private HBox hbox;
 	@FXML
 	private GridPane gridPane;
+	@FXML
+	private VBox sideMenu;
+	@FXML
+	private ScrollPane scrollPane;
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) { }
+	public void initialize(URL location, ResourceBundle resources) {
+		HBox.setHgrow(menu, Priority.ALWAYS);
+		if(customerModel.isDbConnected()) {
+			isConnected.setText("Connection Established");
+		} else {
+			isConnected.setText("Failed to connect to database.");
+		}
+	}
 	
 	public void postInitialize(String[] userData) {
-		HBox.setHgrow(menu, Priority.ALWAYS);
 		this.userData = userData;
 		this.displayUser();
-		this.displayLiveQuotes();
+		
+		PauseTransition wait = new PauseTransition(Duration.millis(100));
+	    wait.setOnFinished((e) -> {
+	    	try {
+	    		customers = customerModel.getCustomers(userData[0]);
+	    	} catch(Exception ec) {
+	    		ec.printStackTrace();
+	    		isConnected.setText("Failed to connect to database.");
+	    	}
+	    	
+	    	this.displayCustomers();
+	    	
+	    });
+	    wait.play();
 	}
 	
 	private void displayUser() {
 		userLabel.setText("Welcome " + userData[1] + " " + userData[2] + "!");
 	}
 	
-	private void displayLiveQuotes() {
-		gridPane.getChildren().clear();
-		for(int i = 0; i < testStocks.length; i++) {
-			StockQuote s = StockController.getStockQuote(testStocks[i]);
-			
-			Button button = new Button();
-			button.setText(s.getSymbol() + "\n" + s.getLastPrice());
-			
-			gridPane.add(button, i, 0);
+	private void displayCustomers() {
+		for(Customer c : customers) {
+			Button b = new Button();
+			b.setText(c.getName() + "\n" + c.getCash());
+			b.setMaxWidth(Double.MAX_VALUE);
+			sideMenu.getChildren().add(b);
 		}
 	}
 	
@@ -69,16 +99,21 @@ public class MainPageController implements Initializable {
 			primaryStage.setResizable(false);
 			
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/brokerlite/Login.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/FXML/Login.fxml").openStream());
 			
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@FXML
+	private void platformExit() {
+		Platform.exit();
 	}
 	
 }
