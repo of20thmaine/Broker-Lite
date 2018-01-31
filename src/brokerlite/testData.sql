@@ -1,3 +1,6 @@
+delete from identity;
+delete from relationship;
+delete from stock_owned;
 delete from people;
 delete from broker;
 delete from credentials;
