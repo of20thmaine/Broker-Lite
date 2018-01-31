@@ -1734,6 +1734,16 @@ IEclipsePreferences#org-eclipse-e4-CSS {
 		'org.eclipse.e4.CSS.syntaxColorer.tokenStyles.string.color=255,198,0'
 		'org.eclipse.e4.CSS.syntaxColorer.tokenStyles.ClassID.color=255,255,255'
 }
+IEclipsePreferences#org-eclipse-emf-mwe2-language-ui {
+	preferences:
+		'syntaxColorer.deprecated_element.color=171,31,54'
+		'syntaxColorer.deprecated_element.style=536870912'
+		'syntaxColorer.feature_ref.color=18,144,195'
+		'syntaxColorer.property_ref.color=102,225,248'
+		'syntaxColorer.property_ref.style=2'
+		'syntaxColorer.string_prop_ref.color=167,236,33'
+		'syntaxColorer.string_prop_ref.style=1'
+}
 IEclipsePreferences#org-eclipse-jdt-ui {
 	preferences:
 		'content_assist_completion_replacement_background=200,200,0'
@@ -1905,17 +1915,24 @@ IEclipsePreferences#org-eclipse-mylyn-wikitext-ui {
 }
 IEclipsePreferences#org-eclipse-pde-ui {
 	preferences:
-		'editor.color.header_assignment=216,216,216'
-		'editor.color.externalized_string=255,198,0'
-		'editor.color.instr=255,255,255'
-		'editor.color.string=255,198,0'
-		'editor.color.tag=121,171,255'
-		'editor.color.header_osgi=141,203,226'
 		'editor.color.default=216,216,216'
-		'editor.color.header_key=141,203,226'
+		'editor.color.externalized_string=255,198,0'
+		'editor.color.externalized_string_italic=true'
+		'editor.color.header_assignment=216,216,216'
+		'editor.color.header_assignment_bold=true'
 		'editor.color.header_attributes=121,171,255'
-		'editor.color.xml_comment=199,221,12'
+		'editor.color.header_key=141,203,226'
+		'editor.color.header_key_bold=true'
+		'editor.color.header_osgi=141,203,226'
 		'editor.color.header_value=255,198,0'
+		'editor.color.header_value_italic=true'
+		'editor.color.instr=255,255,255'
+		'editor.color.instr_bold=true'
+		'editor.color.string=255,198,0'
+		'editor.color.string_italic=true'
+		'editor.color.tag=121,171,255'
+		'editor.color.tag_bold=true'
+		'editor.color.xml_comment=199,221,12'
 }
 IEclipsePreferences#org-eclipse-php-ui {
 	preferences:
@@ -2321,6 +2338,48 @@ IEclipsePreferences#org-eclipse-xtend-core-Xtend {
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.extension.method.invacation.color=255,255,255'
 		'org.eclipse.xtend.core.Xtend.syntaxColorer.tokenStyles.xbase.static.field.color=239,192,144'
 		'AbstractTextEditor.Color.Background=28,31,34'
+}
+IEclipsePreferences#org-eclipse-xtend-ide {
+	preferences:
+		'syntaxColorer.xtend.active.annotation.color=171,48,0'
+		'syntaxColorer.xtend.insignificant.template.text.color=23,198,163'
+		'syntaxColorer.xtend.potential.line.break.color=23,198,163'
+		'syntaxColorer.xtend.richText.bgColor=80,80,80'
+		'syntaxColorer.xtend.richText.color=23,198,163'
+		'syntaxColorer.xtend.template.line.bgColor=80,80,80'
+		'syntaxColorer.xtend.template.line.break.color=23,198,163'
+}
+IEclipsePreferences#org-eclipse-xtext-ui {
+	preferences:
+		'syntaxColorer.comment.color=98,98,98'
+		'syntaxColorer.default.color=217,232,247'
+		'syntaxColorer.error.color=179,26,64'
+		'syntaxColorer.keyword.color=221,40,103'
+		'syntaxColorer.keyword.style=1'
+		'syntaxColorer.number.color=104,151,187'
+		'syntaxColorer.punctuation.color=217,232,247'
+		'syntaxColorer.string.color=41,197,163'
+		'syntaxColorer.task.color=154,140,124'
+		'syntaxColorer.task.style=1'
+		'syntaxColorer.xbase.annotation.color=255,147,147'
+		'syntaxColorer.xbase.deprecated.members.color=171,31,54'
+		'syntaxColorer.xbase.deprecated.members.style=536870912'
+		'syntaxColorer.xbase.extension.method.invacation.color=171,48,0'
+		'syntaxColorer.xbase.field.color=102,225,248'
+		'syntaxColorer.xbase.static.field.color=141,218,248'
+		'syntaxColorer.xbase.static.field.style=2'
+		'syntaxColorer.xbase.static.method.invocation.color=150,236,63'
+		'syntaxColorer.xbase.static.method.invocation.style=2'
+}
+IEclipsePreferences#org-eclipse-xtext-xtext-ui {
+	preferences:
+		'syntaxColorer.DataTypeIndicator.color=141,218,248'
+		'syntaxColorer.NeverCalledRule.color=128,128,128'
+		'syntaxColorer.RuleDeclaration.color=18,144,195'
+		'syntaxColorer.SpecialFeature.color=171,48,0'
+		'syntaxColorer.TypeReference.color=102,225,248'
+		'syntaxColorer.TypeReference.style=2'
+		'syntaxColorer.UnusedValue.color=128,128,128'
 }
 IEclipsePreferences#org-epic-perleditor {
 	preferences:
