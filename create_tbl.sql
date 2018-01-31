@@ -50,9 +50,9 @@ CREATE TABLE stock (
 
 CREATE TABLE relationship (
     broker_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    client_id INTEGER NOT NULL,
     FOREIGN KEY(broker_id) REFERENCES broker(id),
-    FOREIGN KEY(user_id) REFERENCES client(id)
+    FOREIGN KEY(client_id) REFERENCES client(id)
 );
 
 CREATE TABLE stock_owned (
