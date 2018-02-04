@@ -38,36 +38,29 @@ public class RegistrationController implements Initializable{
 		}
 	}
 	
-	public void login(ActionEvent event) {
+	public void register(ActionEvent event) {
 		try {
-			if(loginModel.isLogin(userName.getText(), userPassword.getText())) {
-				isConnected.setText("Login Succesful");
-				String[] userData = loginModel.getUser();
-				
-				((Node)event.getSource()).getScene().getWindow().hide();
-				
-				Stage primaryStage = new Stage();
-				primaryStage.setTitle("Broker Lite");
-				primaryStage.getIcons().add(new Image("/img/icon.png"));
-				primaryStage.setMinHeight(600);
-				primaryStage.setMinWidth(1000);
-				
-				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/FXML/MainPage.fxml").openStream());
-				MainPageController mainPageController = (MainPageController)loader.getController();
+			isConnected.setText("Redirected to registration");
+			
+			((Node)event.getSource()).getScene().getWindow().hide();
+			
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("Broker Lite");
+			primaryStage.getIcons().add(new Image("/img/icon.png"));
+			primaryStage.setMinHeight(600);
+			primaryStage.setMinWidth(1000);
+			
+			FXMLLoader loader = new FXMLLoader();
+			Pane root = loader.load(getClass().getResource("/FXML/Registration.fxml").openStream());
 
-				Scene scene = new Scene(root);
-				scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-				primaryStage.setScene(scene);
-				
-				primaryStage.show();
-				mainPageController.postInitialize(userData);
-				
-			} else {
-				isConnected.setText("Username or Password is not correct.");
-			}
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
+
 		} catch (SQLException e) {
-			isConnected.setText("Username or Password is not correct.");
+			isConnected.setText("Unable to add client.");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
