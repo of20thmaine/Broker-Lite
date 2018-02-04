@@ -44,15 +44,14 @@ CREATE TABLE stock (
 	name TEXT PRIMARY KEY,
 	opening_price INTEGER NOT NULL,
 	closing_price INTEGER NOT NULL,
-    change INTEGER NOT NULL,
-	state TEXT
+    change INTEGER NOT NULL
 );
 
 CREATE TABLE relationship (
     broker_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    client_id INTEGER NOT NULL,
     FOREIGN KEY(broker_id) REFERENCES broker(id),
-    FOREIGN KEY(user_id) REFERENCES client(id)
+    FOREIGN KEY(client_id) REFERENCES client(id)
 );
 
 CREATE TABLE stock_owned (
