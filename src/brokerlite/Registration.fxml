@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <SplitPane dividerPositions="" focusTraversable="true" layoutX="0.0" layoutY="0.0" prefHeight="580.0" prefWidth="599.9999000000025">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="637.0" prefWidth="600.0">
+          <children>
+            <TitledPane alignment="CENTER" animated="false" layoutX="0.0" layoutY="0.0" prefHeight="578.0" prefWidth="598.0" text="Registration" textAlignment="CENTER">
+              <content>
+                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <Line endX="460.0" endY="-1.0" layoutX="115.0" layoutY="72.0" startX="-100.0" />
+                    <Text layoutX="273.0" layoutY="38.0" scaleX="11.090741927490699" scaleY="6.887705177887203" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Registration" textAlignment="CENTER">
+                      <font>
+                        <Font size="5.0" />
+                      </font>
+                    </Text>
+                    <Text layoutX="147.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                    <TextField layoutX="229.0" layoutY="94.0" prefWidth="200.0" />
+                    <Text layoutX="147.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                    <TextField layoutX="229.0" layoutY="128.0" prefWidth="200.0" />
+                    <Text layoutX="121.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" />
+                    <TextField layoutX="229.0" layoutY="160.0" prefWidth="200.0" />
+                    <Text layoutX="176.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail" />
+                    <TextField layoutX="229.0" layoutY="193.0" prefWidth="200.0" />
+                    <Text layoutX="166.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
+                    <TextField layoutX="229.0" layoutY="224.0" prefWidth="200.0" />
+                    <Slider blockIncrement="0.0" layoutX="82.0" layoutY="296.0" majorTickUnit="1000.0" max="10000.0" minorTickCount="100" prefWidth="430.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                    <Text layoutX="240.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Investment" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

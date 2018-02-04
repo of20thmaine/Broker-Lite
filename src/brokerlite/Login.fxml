@@ -21,7 +21,12 @@
             <Font size="20.0" />
          </font>
       </PasswordField>
-      <Button id="login-button" layoutX="236.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="129.0" text="Login">
+      <Button id="login-button" layoutX="157.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="129.0" text="Login">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="register-button" layoutX="318.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="129.0" text="Register">
          <font>
             <Font size="18.0" />
          </font>
