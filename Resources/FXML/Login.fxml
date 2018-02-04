@@ -26,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="316.0" layoutY="488.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="129.0" text="Register">
+      <Button id="register-button" layoutX="316.0" layoutY="488.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="129.0" text="Register">
          <font>
             <Font size="18.0" />
          </font>
