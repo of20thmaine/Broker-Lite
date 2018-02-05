@@ -10,9 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,11 +23,15 @@ public class LoginController implements Initializable {
 	public LoginModel loginModel = new LoginModel();
 	
 	@FXML
+	private AnchorPane anchorPane;
+	@FXML
 	private Label isConnected;
 	@FXML
 	private TextField userName;
 	@FXML
 	private TextField userPassword;
+	@FXML
+	private Button register;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -33,6 +39,15 @@ public class LoginController implements Initializable {
 			isConnected.setText("Connection Established");
 		} else {
 			isConnected.setText("No Connection");
+		}
+	}
+	
+	public void registerUser(ActionEvent event) {
+		try {
+			AnchorPane registerUserPage = FXMLLoader.load(getClass().getResource("/FXML/Registration.fxml"));
+			anchorPane.getChildren().add(registerUserPage);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
