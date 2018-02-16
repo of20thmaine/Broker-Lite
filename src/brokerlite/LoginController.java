@@ -44,11 +44,34 @@ public class LoginController implements Initializable {
 	
 	public void registerUser(ActionEvent event) {
 		try {
-			AnchorPane registerUserPage = FXMLLoader.load(getClass().getResource("/FXML/Registration.fxml"));
-			anchorPane.getChildren().add(registerUserPage);
+				((Node)event.getSource()).getScene().getWindow().hide();
+				
+				Stage primaryStage = new Stage();
+				primaryStage.setTitle("Broker Lite");
+				primaryStage.getIcons().add(new Image("/img/icon.png"));
+				primaryStage.setMinHeight(580);
+				primaryStage.setMinWidth(600);
+				
+				FXMLLoader loader = new FXMLLoader();
+				Pane root = loader.load(getClass().getResource("/FXML/Registration.fxml").openStream());
+				RegistrationController registrationController = (RegistrationController)loader.getController();
+
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
+				primaryStage.setScene(scene);
+				
+				primaryStage.show();
+				
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+//		try {
+//			AnchorPane registerUserPage = FXMLLoader.load(getClass().getResource("/FXML/Registration.fxml"));
+//			anchorPane.getChildren().add(registerUserPage);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void login(ActionEvent event) {

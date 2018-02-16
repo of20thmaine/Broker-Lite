@@ -1,6 +1,6 @@
 package brokerlite;
 
-import java.sql.*
+import java.sql.*;
 
 public class RegistrationModel {
 	
@@ -24,21 +24,28 @@ public class RegistrationModel {
 		}
 	}
 	
-	public boolean isComplete(String lname, String fname, String phoneNum, String email, String address, String cash) throws SQLException {
+	public void isComplete(String lname, String fname, int phoneNum, String email, String address, int cash) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "INSERT INTO client VALUES ('"+lname+"','"+fname+"','"+phoneNum+"','"+email+"','"+address+"',"+cash+");";
-		
+//		String query = "INSERT INTO client VALUES ('"+lname+"','"+fname+"','"+phoneNum+"','"+email+"','"+address+"',"+cash+");";
+		String query = "INSERT INTO people (id, last_name, first_name,email) "
+				+ "VALUES (?,?,?,?)";
 		try {
 			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, 99999);
+			preparedStatement.setString(2, lname);
+			preparedStatement.setString(3, fname);
+			preparedStatement.setString(4, email);
+			System.out.println("The query is the issue");
 			resultSet = preparedStatement.executeQuery();
-			System.out.println("Success");
+			System.out.println(resultSet);
 		} catch(Exception e) {
-			return false;
+			
+			e.printStackTrace();
 		} finally {
 			preparedStatement.close();
-			resultSet.close();
 		}
+		System.out.println("Success");
 	}
 
 }

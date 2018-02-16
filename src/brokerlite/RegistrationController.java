@@ -10,61 +10,84 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class RegistrationController implements Initializable{
-	package brokerlite;
 
 		
 	public RegistrationModel registrationModel = new RegistrationModel();
 	
-	@FXML
-	private Label isConnected;
-	@FXML
-	private TextField last_name,first_name,phone_num,email,address;
-	@FXML
-	private Slider investment;
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextField address, last_name, phone_number, first_name, email;
+    
+    @FXML
+    private Button submitButton;
+    
+    @FXML
+    private Slider investment;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(loginModel.isDbConnected()) {
-			isConnected.setText("Connection Established");
-		} else {
-			isConnected.setText("No Connection");
+
+	}
+	
+	public void submitUser(ActionEvent event) {
+		
+		int money = (int)investment.getValue();
+		int phoneNum = Integer.valueOf(phone_number.getText());
+		try {
+			registrationModel.isComplete(last_name.getText(),
+										 first_name.getText(),
+										 phoneNum,
+										 email.getText(),
+										 address.getText(),
+										 money);
+		} catch (SQLException s){
+			System.out.println("Invalid data.");
 		}
 	}
 	
-	public void register(ActionEvent event) {
+	public void clearUser() {
+		address.clear();
+		last_name.clear();
+		phone_number.clear();
+		first_name.clear();
+		email.clear();
+	}
+	
+	public void backUser(ActionEvent event) {
 		try {
-			isConnected.setText("Redirected to registration");
-			
 			((Node)event.getSource()).getScene().getWindow().hide();
 			
 			Stage primaryStage = new Stage();
 			primaryStage.setTitle("Broker Lite");
 			primaryStage.getIcons().add(new Image("/img/icon.png"));
-			primaryStage.setMinHeight(600);
-			primaryStage.setMinWidth(1000);
+			primaryStage.setMinHeight(800);
+			primaryStage.setMinWidth(600);
+			primaryStage.setResizable(false);
 			
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/FXML/Registration.fxml").openStream());
-
+			Pane root = loader.load(getClass().getResource("/FXML/Login.fxml").openStream());
+			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
-
-		} catch (SQLException e) {
-			isConnected.setText("Unable to add client.");
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 }
