@@ -14,13 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 	
-	public LoginModel loginModel = new LoginModel();
+	public UserModel userModel = new UserModel();
 	
 	@FXML
 	private AnchorPane anchorPane;
@@ -32,14 +33,18 @@ public class LoginController implements Initializable {
 	private TextField userPassword;
 	@FXML
 	private Button register;
+	@FXML 
+	private ImageView logo;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(loginModel.isDbConnected()) {
+		if(userModel.isDbConnected()) {
 			isConnected.setText("Connection Established");
 		} else {
 			isConnected.setText("No Connection");
 		}
+		
+		logo.setImage(new Image("/img/brokerlite.png"));
 	}
 	
 	public void registerUser(ActionEvent event) {
@@ -76,9 +81,8 @@ public class LoginController implements Initializable {
 	
 	public void login(ActionEvent event) {
 		try {
-			if(loginModel.isLogin(userName.getText(), userPassword.getText())) {
+			if(userModel.authenticateUser(userName.getText(), userPassword.getText())) {
 				isConnected.setText("Login Succesful");
-				String[] userData = loginModel.getUser();
 				
 				((Node)event.getSource()).getScene().getWindow().hide();
 				
@@ -97,7 +101,7 @@ public class LoginController implements Initializable {
 				primaryStage.setScene(scene);
 				
 				primaryStage.show();
-				mainPageController.postInitialize(userData);
+				mainPageController.postInitialize(userModel);
 				
 			} else {
 				isConnected.setText("Username or Password is not correct.");

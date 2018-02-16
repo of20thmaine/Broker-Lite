@@ -3,7 +3,6 @@ package brokerlite;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,13 +21,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class MainPageController implements Initializable {
 	
-	private String[] userData;
+	private UserModel userModel;
 	private ArrayList<Customer> customers;
-	private CustomerModel customerModel = new CustomerModel();
 	
 	@FXML
 	private Label isConnected;
@@ -48,34 +45,20 @@ public class MainPageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		HBox.setHgrow(menu, Priority.ALWAYS);
-		if(customerModel.isDbConnected()) {
-			isConnected.setText("Connection Established");
-		} else {
-			isConnected.setText("Failed to connect to database.");
-		}
+		isConnected.setText("Connection Established");
 	}
 	
-	public void postInitialize(String[] userData) {
-		this.userData = userData;
+	public void postInitialize(UserModel user) {
+		userModel = user;
 		this.displayUser();
 		
-		PauseTransition wait = new PauseTransition(Duration.millis(100));
-	    wait.setOnFinished((e) -> {
-	    	try {
-	    		customers = customerModel.getCustomers(userData[0]);
-	    	} catch(Exception ec) {
-	    		ec.printStackTrace();
-	    		isConnected.setText("Failed to connect to database.");
-	    	}
+		customers = userModel.getCustomers();
 	    	
-	    	this.displayCustomers();
-	    	
-	    });
-	    wait.play();
+	    this.displayCustomers();
 	}
 	
 	private void displayUser() {
-		userLabel.setText("Welcome " + userData[1] + " " + userData[2] + "!");
+		userLabel.setText("Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + "!");
 	}
 	
 	private void displayCustomers() {

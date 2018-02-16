@@ -15,33 +15,7 @@ public class SqlConnect {
 			return null;
 		}
 
-	}
-
-	// I commented out this test code to test some methods below. I don't think create database code will be
-	// necessary for project, but this is best class for "createTable" so I added create table method for adding to
-	// currently existing database.
-	
-//	//Added by Sam
-//	public static void createNewDatabase(String filename) {
-//		
-//		//Did not put in try statement because this should only execute if the connection
-//		//established earlier.
-//		String url = "jdbc:sqlite:BrokerLite.sqlite";
-//		
-//		DatabaseMetaData meta = conn.getMetaData();
-//		System.out.println("The driver name is "+ meta.getDriverName());
-//		System.out.println("Created a new database.");
-//	} 
-//	
-//	//Added by Sam
-//	public static void createTables(String filename) {
-//		String sql = "source "+filename+";";
-//		Statement stmt = conn.createStatement();
-//		stmt.execute(sql);
-//		System.out.println("Successfully added tables to the database.")
-//	
-//	}
-	
+	}	
 
 	/**
 	 * Adds tables to our "BrokerLite.sql" database. Input "createQuery" must be in proper SQL format
