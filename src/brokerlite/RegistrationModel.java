@@ -26,7 +26,7 @@ public class RegistrationModel {
 	
 	public void isComplete(String lname, String fname, int phoneNum, String email, String address, int cash) throws SQLException {
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+//		ResultSet resultSet = null;
 //		String query = "INSERT INTO client VALUES ('"+lname+"','"+fname+"','"+phoneNum+"','"+email+"','"+address+"',"+cash+");";
 		String query = "INSERT INTO people (id, last_name, first_name,email) "
 				+ "VALUES (?,?,?,?)";
@@ -37,15 +37,15 @@ public class RegistrationModel {
 			preparedStatement.setString(3, fname);
 			preparedStatement.setString(4, email);
 			System.out.println("The query is the issue");
-			resultSet = preparedStatement.executeQuery();
-			System.out.println(resultSet);
+			preparedStatement.execute();
+			System.out.println("Success");
 		} catch(Exception e) {
 			
 			e.printStackTrace();
 		} finally {
 			preparedStatement.close();
 		}
-		System.out.println("Success");
+//		System.out.println("Success");
 	}
 
 }

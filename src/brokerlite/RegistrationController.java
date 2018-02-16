@@ -54,7 +54,9 @@ public class RegistrationController implements Initializable{
 										 email.getText(),
 										 address.getText(),
 										 money);
+			backUser(event);
 		} catch (SQLException s){
+			clearUser();
 			System.out.println("Invalid data.");
 		}
 	}
