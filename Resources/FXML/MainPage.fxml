@@ -15,16 +15,22 @@
                <children>
                   <MenuBar fx:id="menu" prefHeight="39.0" prefWidth="624.0">
                     <menus>
-                      <Menu mnemonicParsing="false" text="File">
+                      <Menu mnemonicParsing="false" text="Broker-Lite">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#platformExit" text="Exit" />
                         </items>
                       </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
+                      <Menu mnemonicParsing="false" text="Customer">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
+                          <MenuItem mnemonicParsing="false" text="Register Customer" />
+                              <MenuItem mnemonicParsing="false" text="Remove Customer" />
                         </items>
                       </Menu>
+                        <Menu mnemonicParsing="false" text="Options">
+                          <items>
+                              <MenuItem mnemonicParsing="false" text="Preferences" />
+                          </items>
+                        </Menu>
                       <Menu mnemonicParsing="false" text="Help">
                         <items>
                           <MenuItem mnemonicParsing="false" text="About" />
@@ -44,29 +50,15 @@
                </children>
             </HBox>
          </top>
-         <center>
-            <GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </center>
          <bottom>
-            <HBox prefHeight="26.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+            <HBox id="footer" prefHeight="26.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="26.0" prefWidth="49.0" text="Status: " textFill="WHITE">
+                  <Label prefHeight="26.0" prefWidth="50.0" text="Status: " textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="isConnected" prefHeight="30.0" prefWidth="315.0" text="Connection" textFill="WHITE">
+                  <Label fx:id="isConnected" prefHeight="26.0" prefWidth="227.0" text="Connection" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,8 +67,15 @@
             </HBox>
          </bottom>
          <left>
-            <VBox fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
+            <VBox id="side-menu" fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
          </left>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Market" />
+              </tabs>
+            </TabPane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

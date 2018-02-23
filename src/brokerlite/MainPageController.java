@@ -64,6 +64,7 @@ public class MainPageController implements Initializable {
 	private void displayCustomers() {
 		for(Customer c : customers) {
 			Button b = new Button();
+			b.setId("customer-button");
 			b.setText(c.getName() + "\n" + c.getCash());
 			b.setMaxWidth(Double.MAX_VALUE);
 			sideMenu.getChildren().add(b);

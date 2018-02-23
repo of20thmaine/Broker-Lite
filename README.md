@@ -1,6 +1,6 @@
 # Broker-Lite
 
-### Connect account managers to their customers assets quickly and reliably.
+#### Connect account managers to their customers assets quickly and reliably.
 
 ## Contribution Requirements/Dependencies
 
@@ -13,6 +13,7 @@
 
 ## Current Models:
 * See database schema in proposal directory.
+* A test user has been generated with full set of data; login with "test", "test".
 
 ## UI Goals:
 

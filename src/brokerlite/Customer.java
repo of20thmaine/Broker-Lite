@@ -1,5 +1,7 @@
 package brokerlite;
 
+import java.text.DecimalFormat;
+
 public class Customer {
 	
 	private int id;
@@ -24,8 +26,11 @@ public class Customer {
 		return firstName + " " + lastName;
 	}
 	
-	public int getCash() {
-		return cash;
+	public String getCash() {
+		double newCash = cash/10.0;
+	    DecimalFormat f = new DecimalFormat("##.00");
+	  
+		return "$" + f.format(newCash);
 	}
 	
 	public String getPhoneNumber() {

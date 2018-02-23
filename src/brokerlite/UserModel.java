@@ -73,7 +73,7 @@ public class UserModel {
 			
 			resultSet = preparedStatement.executeQuery();
 			
-			if(resultSet.next()) {
+			while(resultSet.next()) {
 				int cId = resultSet.getInt(1);
 				String clN = resultSet.getString(2);
 				String cfN = resultSet.getString(3);
@@ -81,7 +81,7 @@ public class UserModel {
 				String email = resultSet.getString(5);
 				String add = resultSet.getString(6);
 				int cash = resultSet.getInt(7);
-				
+
 				customers.add(new Customer(cId, clN, cfN, pN, email, add, cash));
 			} 
 		} catch(Exception e) {
