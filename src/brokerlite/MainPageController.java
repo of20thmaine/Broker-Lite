@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -41,11 +45,14 @@ public class MainPageController implements Initializable {
 	private VBox sideMenu;
 	@FXML
 	private ScrollPane scrollPane;
+	@FXML
+	private TabPane tabPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		HBox.setHgrow(menu, Priority.ALWAYS);
 		isConnected.setText("Connection Established");
+		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 	}
 	
 	public void postInitialize(UserModel user) {
@@ -67,6 +74,17 @@ public class MainPageController implements Initializable {
 			b.setId("customer-button");
 			b.setText(c.getName() + "\n" + c.getCash());
 			b.setMaxWidth(Double.MAX_VALUE);
+			
+			 b.setOnAction(new EventHandler<ActionEvent>() {
+		            @Override
+		            public void handle(ActionEvent event) {
+		            	Tab tab = new Tab();
+		        		tab.setText(c.getName());
+		        		tabPane.getTabs().add(tab);
+		        		tabPane.getSelectionModel().select(tab);
+		            }
+		        });
+			
 			sideMenu.getChildren().add(b);
 		}
 	}

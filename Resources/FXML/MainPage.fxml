@@ -70,7 +70,7 @@
             <VBox id="side-menu" fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
          </left>
          <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab text="Market" />
               </tabs>
