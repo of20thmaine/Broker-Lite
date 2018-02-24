@@ -58,8 +58,8 @@ public class LoginController implements Initializable {
 				primaryStage.setMinWidth(600);
 				
 				FXMLLoader loader = new FXMLLoader();
-				Pane root = loader.load(getClass().getResource("/FXML/Registration.fxml").openStream());
-				RegistrationController registrationController = (RegistrationController)loader.getController();
+				Pane root = loader.load(getClass().getResource("/FXML/NewUser.fxml").openStream());
+				NewUserController newUserController = (NewUserController)loader.getController();
 
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
@@ -71,12 +71,6 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 		
-//		try {
-//			AnchorPane registerUserPage = FXMLLoader.load(getClass().getResource("/FXML/Registration.fxml"));
-//			anchorPane.getChildren().add(registerUserPage);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public void login(ActionEvent event) {

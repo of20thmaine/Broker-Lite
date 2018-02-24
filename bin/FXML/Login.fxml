@@ -45,5 +45,6 @@
             </Label>
          </children>
       </Pane>
+      <ImageView fx:id="logo" fitHeight="150.0" fitWidth="475.0" layoutX="79.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

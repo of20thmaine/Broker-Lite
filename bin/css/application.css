@@ -1,8 +1,8 @@
 #main-pane {
-	-fx-background-color: #323135;
+	-fx-background-color: #5c5656;
 }
 #login-pane {
-	-fx-background-color: #323135;
+	-fx-background-color: #5c5656;
 }
 #login-button {
 	-fx-background-color: 
@@ -20,34 +20,47 @@
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
 #login-header {
-	-fx-background-color: #726e6e;
+	-fx-background-color: #403e40;
 }
 #footer {
-	-fx-background-color: #726e6e;
-}
-#main-pane {
-	-fx-background-color: #323135;
+	-fx-background-color: #403e40;
 }
 #user-welcome {
-	-fx-background-color: #44434b;
+	-fx-background-color: #403e40;
 	-fx-font-family: "Helvetica";
     -fx-font-size: 16 px;
     -fx-font-weight: 300;
 }
 #log-out {
-	-fx-border-color: #ff0000;
+	-fx-border-color: #FFFFFF;
 	-fx-border-radius: 12 12 12 12;
 	-fx-padding: 0 0 0 0;
-	-fx-border-width: 4 4 4 4;
+	-fx-border-width: 1 1 1 1;
 	-fx-background-radius: 0 11 11 0;
-	-fx-background-color: #44434b;
+	-fx-background-color: #403e40;
 	-fx-font-family: "Helvetica";
     -fx-font-size: 16 px;
     -fx-font-weight: 300;
 }
+
+#side-menu {
+	-fx-padding: 10 0 0 0;
+}
+
+#customer-button {
+	-fx-background-color: #5c5656;
+	-fx-border-width: 1 1 1 1;
+	-fx-border-color: #FFFFFF;
+	-fx-font-family: "Helvetica";
+    -fx-font-size: 16 px;
+    -fx-font-weight: 300;
+    -fx-text-fill: #FFFFFF;
+}
+
+
 /* VARIABLE DEFINITIONS: Only these 4 variables have to be adjusted, the rest is copy-paste */
 * {
-    -fx-my-menu-color: #44434b;                  /* Change according to your needs */
+    -fx-my-menu-color: #403e40;                  /* Change according to your needs */
     -fx-my-menu-color-highlighted: #FFFFFF;      /* Change according to your needs */
     -fx-my-menu-font-color: #FFFFFF;             /* Change according to your needs */
     -fx-my-menu-font-color-highlighted: #000000; /* Change according to your needs */
@@ -100,7 +113,6 @@
 /*** The item itself (not hovered / focused) ***/
 .menu-item {
     -fx-background-color: -fx-my-menu-color;
-    -fx-pref-width: 80;
     -fx-min-width: 60;
 }
 
@@ -128,4 +140,37 @@
 /*** The context menu that contains a menu's menu items ***/
 .context-menu {
     -fx-background-color: -fx-my-menu-color;
+}
+
+/*TAB PANE */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width:90px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #3c3c3c;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #96b946;
 }
