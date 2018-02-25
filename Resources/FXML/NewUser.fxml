@@ -5,7 +5,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.NewUserController">
    <children>
       <Label layoutX="191.0" layoutY="14.0" prefHeight="74.0" prefWidth="218.0" text="New User">
@@ -41,5 +40,6 @@
             <Font size="23.0" />
          </font>
       </Button>
+      <Label fx:id="message" layoutX="7.0" layoutY="373.0" opacity="0.52" prefHeight="27.0" prefWidth="589.0" text="Create new user" />
    </children>
 </Pane>

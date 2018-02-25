@@ -24,12 +24,11 @@ public class RegistrationModel {
 		}
 	}
 	
-	public void isComplete(String lname, String fname, int phoneNum, String email, String address, int cash) throws SQLException {
+	public void isComplete(String lname, String fname, int phoneNum, String email, String address) throws SQLException {
 		PreparedStatement preparedStatement = null;
 //		ResultSet resultSet = null;
-//		String query = "INSERT INTO client VALUES ('"+lname+"','"+fname+"','"+phoneNum+"','"+email+"','"+address+"',"+cash+");";
-		String query = "INSERT INTO people (id, last_name, first_name,email) "
-				+ "VALUES (?,?,?,?)";
+		String query = "INSERT INTO broker (last_name, first_name, phone_num, email, address) VALUES (?,?,?,?,?)";
+
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, 99999);

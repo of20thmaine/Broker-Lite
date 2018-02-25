@@ -33,25 +33,21 @@ public class RegistrationController implements Initializable{
     @FXML
     private Button submitButton;
     
-    @FXML
-    private Slider investment;
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
 	
 	public void submitUser(ActionEvent event) {
-		
-		int money = (int)investment.getValue();
+
 		int phoneNum = Integer.valueOf(phone_number.getText());
 		try {
 			registrationModel.isComplete(last_name.getText(),
 										 first_name.getText(),
 										 phoneNum,
 										 email.getText(),
-										 address.getText(),
-										 money);
+										 address.getText()
+										 );
 			backUser(event);
 		} catch (SQLException s){
 			clearUser();
