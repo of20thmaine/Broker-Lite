@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -33,6 +34,9 @@ public class RegistrationController implements Initializable{
     @FXML
     private Button submitButton;
     
+    @FXML
+    private Label message;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -50,8 +54,7 @@ public class RegistrationController implements Initializable{
 										 );
 			backUser(event);
 		} catch (SQLException s){
-			clearUser();
-			System.out.println("Invalid data.");
+			message.setText("Not all fields are complete");;
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class RegistrationController implements Initializable{
 		email.clear();
 	}
 	
-	public void backUser(ActionEvent event) {
+	private void backUser(ActionEvent event) {
 		try {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			

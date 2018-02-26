@@ -27,17 +27,16 @@ public class NewUserModel {
 	public void createUser(String username, String pw, String pwVerify) throws SQLException {
 		PreparedStatement ps = null;
 		String query = "INSERT INTO credentials (username, password) VALUES (?,?)";
-		if (pw == pwVerify) {
-			try {
-				ps = connection.prepareStatement(query);
-				ps.setString(1, username);
-				ps.setString(2, pw);
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				ps.close();
-			}
-		
+
+		try {
+			ps = connection.prepareStatement(query);
+			ps.setString(1, username);
+			ps.setString(2, pw);
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ps.close();
 		}
 	}
 }

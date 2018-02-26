@@ -42,11 +42,15 @@ public class NewUserController implements Initializable {
     @FXML
     void submit(ActionEvent event) {
     	try {
-    		newUserModel.createUser(username.getText(), password.getText(), vPassword.getText());
-    		this.enterInfo(event);
+    		if (password.getText().equals(vPassword.getText())) {
+    			newUserModel.createUser(username.getText(), password.getText(), vPassword.getText());
+    			this.enterInfo(event);
+    		} else {
+    			message.setText("Passwords do not match.");
+    		}
     	} catch (SQLException s) {
     		this.clear(event);
-    		message.setText("Invalid username or password");
+    		message.setText("Username already in use.");
     		s.printStackTrace();
     	}
     }

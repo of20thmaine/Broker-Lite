@@ -28,16 +28,18 @@ public class RegistrationModel {
 		PreparedStatement preparedStatement = null;
 //		ResultSet resultSet = null;
 		String query = "INSERT INTO broker (last_name, first_name, phone_num, email, address) VALUES (?,?,?,?,?)";
-
+		
+		/* Need to be able to get broker ID from NewUser registration and pass it into here */
+		
 		try {
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, 99999);
-			preparedStatement.setString(2, lname);
-			preparedStatement.setString(3, fname);
+			preparedStatement.setString(1, lname);
+			preparedStatement.setString(2, fname);
+			preparedStatement.setInt(3, phoneNum);
 			preparedStatement.setString(4, email);
-			System.out.println("The query is the issue");
+			preparedStatement.setString(5, address);
 			preparedStatement.execute();
-			System.out.println("Success");
+//			System.out.println("Success");
 		} catch(Exception e) {
 			
 			e.printStackTrace();
