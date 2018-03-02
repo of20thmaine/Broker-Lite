@@ -15,6 +15,11 @@
 * See database schema in proposal directory.
 * A test user has been generated with full set of data; login with "test", "test".
 
+## Current DB:
+
+![Database](proposal/db-mockups/dbModel.png?raw=true "Title")
+* Reference https://www.sqlite.org/datatype3.html for data types and how to correctly input date.
+
 ## UI Goals:
 
 ### Preliminary Main Page Mockup
@@ -28,11 +33,6 @@
 * Unified text scheme.
 * Keep user interaction between any given location and desired response minimal.
 * "Wired-In Design" - Design should exploit user's desire to feel connected to larger world. Design should make user feel as though they're plugged into humanity's collective central nervous system.
-
-## Current DB:
-
-![Database](proposal/db-mockups/dbModel.png?raw=true "Title")
-* Reference https://www.sqlite.org/datatype3.html for data types and how to correctly input date.
 
 ### To do list:
 * Complete database table design.
