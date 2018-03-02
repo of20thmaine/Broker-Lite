@@ -23,10 +23,12 @@ CREATE TABLE client (
 );
 
 CREATE TABLE stock (
-	name TEXT PRIMARY KEY,
-	opening_price INTEGER NOT NULL,
-	closing_price INTEGER NOT NULL,
-    change INTEGER NOT NULL
+	name TEXT,
+	date_time INTEGER,
+	opening_price REAL NOT NULL,
+	current_price REAL NOT NULL,
+    change REAL NOT NULL,
+	PRIMARY KEY (name,date_time)
 );
 
 CREATE TABLE broker (
