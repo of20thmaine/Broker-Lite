@@ -31,8 +31,8 @@
 
 ## Current DB:
 
-![Database](proposal/db-mockups/dbModel.pdf?raw=true "Title")
-* Refrence https://www.sqlite.org/datatype3.html for data types and how to correctly input date.
+![Database](proposal/db-mockups/dbModel.png?raw=true "Title")
+* Reference https://www.sqlite.org/datatype3.html for data types and how to correctly input date.
 
 ### To do list:
 * Complete database table design.
