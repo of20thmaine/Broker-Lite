@@ -6,9 +6,9 @@ public class Customer {
 	
 	private int id;
 	private String firstName, lastName, phoneNumber, email, address;
-	private int cash;
+	private double cash;
 
-	public Customer(int id, String firstName, String lastName, String phoneNumber, String email, String address, int cash) {
+	public Customer(int id, String firstName, String lastName, String phoneNumber, String email, String address, double cash) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -27,10 +27,9 @@ public class Customer {
 	}
 	
 	public String getCash() {
-		double newCash = cash/10.0;
 	    DecimalFormat f = new DecimalFormat("##.00");
 	  
-		return "$" + f.format(newCash);
+		return "$" + f.format(cash);
 	}
 	
 	public String getPhoneNumber() {

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.NewLoginController">
+   <children>
+      <Pane id="left-pane-default" fx:id="leftPane" prefHeight="500.0" prefWidth="740.0">
+         <children>
+            <Label id="big-label" layoutX="104.0" layoutY="118.0" prefHeight="102.0" prefWidth="508.0" text="Welcome to Broker-Lite" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="48.0" />
+               </font>
+            </Label>
+            <Label id="little-label" layoutX="47.0" layoutY="226.0" prefHeight="65.0" prefWidth="622.0" text="The world's most effective asset management tool." textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <Button id="log-in" layoutX="255.0" layoutY="331.0" mnemonicParsing="false" onAction="#registerUser" prefHeight="45.0" prefWidth="207.0" text="Sign Up" />
+         </children></Pane>
+      <Pane id="right-pane" fx:id="rightPane" prefHeight="500.0" prefWidth="311.0" stylesheets="@../css/login.css">
+         <children>
+            <Label id="little-label" layoutX="53.0" layoutY="71.0" prefHeight="54.0" prefWidth="183.0" text="Welcome Back!" textAlignment="JUSTIFY" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="userName" layoutX="19.0" layoutY="200.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="248.0" promptText="Username" snapToPixel="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="userPassword" layoutX="20.0" layoutY="263.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#login" prefHeight="34.0" prefWidth="248.0" promptText="Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+            <Button id="log-in" layoutX="50.0" layoutY="329.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#login" prefHeight="45.0" prefWidth="190.0" text="Login">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label id="big-label" layoutX="72.0" layoutY="111.0" prefHeight="65.0" prefWidth="144.0" text="Sign In" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="isConnected" layoutX="19.0" layoutY="394.0" prefHeight="54.0" prefWidth="248.0" wrapText="true">
+               <font>
+                  <Font name="Consolas" size="13.0" />
+               </font>
+            </Label>
+         </children></Pane>
+   </children>
+</HBox>

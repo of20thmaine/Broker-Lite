@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +22,6 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -96,15 +96,13 @@ public class MainPageController implements Initializable {
 			Stage primaryStage = new Stage();
 			primaryStage.setTitle("Broker Lite");
 			primaryStage.getIcons().add(new Image("/img/icon.png"));
-			primaryStage.setMinHeight(800);
-			primaryStage.setMinWidth(600);
+			primaryStage.setMinHeight(500);
+			primaryStage.setMinWidth(1000);
 			primaryStage.setResizable(false);
 			
-			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/FXML/Login.fxml").openStream());
-			
+			Parent root = FXMLLoader.load(getClass().getResource("/FXML/newLogin.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/login.css").toExternalForm());
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();

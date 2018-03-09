@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane id="left-pane-default" fx:id="leftPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.RegisterBrokerController">
+   <children>
+      <Label id="little-label" layoutX="71.0" layoutY="97.0" prefHeight="39.0" prefWidth="519.0" text="Enter a Username between 6-12 characters." textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="userName" layoutX="71.0" layoutY="146.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="343.0" promptText="Enter a Username" snapToPixel="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label id="little-label" layoutX="71.0" layoutY="198.0" prefHeight="39.0" prefWidth="519.0" text="Enter a Password between 6-12 characters." textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="userPassword1" layoutX="71.0" layoutY="246.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="343.0" promptText="Enter a Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="userPassword2" layoutX="71.0" layoutY="306.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#register" prefHeight="39.0" prefWidth="343.0" promptText="Re-enter Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Button id="log-in" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="207.0" text="Register" />
+      <Button id="clear-button" fx:id="clearButton" layoutX="374.0" layoutY="425.0" mnemonicParsing="false" onAction="#clearUser" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+      <Label fx:id="statusLabel" layoutX="71.0" layoutY="361.0" prefHeight="54.0" prefWidth="396.0" wrapText="true">
+         <font>
+            <Font name="Consolas" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

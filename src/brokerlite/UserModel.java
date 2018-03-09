@@ -30,6 +30,47 @@ public class UserModel {
 		}
 	}
 	
+	public boolean createUser(String user, String password) throws SQLException {
+		PreparedStatement ps = null;
+		String query = "INSERT INTO credentials (username, password) VALUES (?,?)";
+
+		try {
+			ps = connection.prepareStatement(query);
+			ps.setString(1, user);
+			ps.setString(2, password);
+			ps.execute();
+			
+			return this.authenticateUser(user, password);
+		} catch (Exception e) {
+			return false;
+		} finally {
+			ps.close();
+		}
+	}
+	
+	public boolean completeRegistration(String lname, String fname, String phoneNum, String email, String address) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO broker (id, last_name, first_name, phone_num, email, address) VALUES (?,?,?,?,?,?)";
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setString(2, lname);
+			preparedStatement.setString(3, fname);
+			preparedStatement.setString(4, phoneNum);
+			preparedStatement.setString(5, email);
+			preparedStatement.setString(6, address);
+			preparedStatement.execute();
+			
+			return true;
+		} catch(Exception e) {
+			return false;
+		} finally {
+			preparedStatement.close();
+		}
+	}
+	
 	public boolean authenticateUser(String user, String password) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -43,17 +84,13 @@ public class UserModel {
 			resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				userName = resultSet.getString(1);
-				userId = resultSet.getInt(4);
-				
-				this.populateCustomers();
-				this.populateUserData();
+				userName = resultSet.getString(2);
+				userId = resultSet.getInt(1);
 				
 				return true;
 			} else {
 				return false;
-			}
-					
+			}	
 		} catch(Exception e) {
 			return false;
 		} finally {
@@ -62,7 +99,8 @@ public class UserModel {
 		}
 	}
 	
-	private void populateCustomers() throws SQLException {
+	public void populateCustomers() throws SQLException {
+		customers.clear();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String query = "SELECT * FROM client WHERE id IN (SELECT client_id FROM relationship WHERE broker_id = ?);";
@@ -80,7 +118,7 @@ public class UserModel {
 				String pN = resultSet.getString(4);
 				String email = resultSet.getString(5);
 				String add = resultSet.getString(6);
-				int cash = resultSet.getInt(7);
+				double cash = resultSet.getDouble(7);
 
 				customers.add(new Customer(cId, clN, cfN, pN, email, add, cash));
 			} 
@@ -92,7 +130,7 @@ public class UserModel {
 		}
 	}
 	
-	private void populateUserData() throws SQLException {
+	public void populateUserData() throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String query = "SELECT * FROM broker WHERE id= ?;";

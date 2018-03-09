@@ -1,0 +1,59 @@
+.root {
+	-fx-background-image:url('/img/banner.jpg');
+}
+
+.label {
+	-fx-font-family: "Helvetica";
+    -fx-text-fill: #FFFFFF;
+    -fx-alignment:center;
+    -fx-font-size: 16 px;
+}
+
+#big-label {
+	-fx-font-size: 42 px;
+}
+
+#little-label {
+	-fx-font-size: 26 px;
+}
+
+#right-pane {
+	-fx-background-color: #c63d3d;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.43), 0.0, 25.0, -3.0, 0.0);
+}
+
+#left-pane-default {
+	-fx-background-color: rgba(0, 0, 0, 0.23);
+}
+
+#log-in {
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-width: 2 2 2 2;
+	-fx-background-color: #c63d3d;
+	-fx-font-family: "Helvetica";
+    -fx-font-size: 26 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 40 5 40;
+}
+
+#clear-button {
+	-fx-border-color: #FFFFFF;
+	-fx-border-width: 1;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-color: transparent;
+	-fx-font-family: "Helvetica";
+    -fx-font-size: 12 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 0;
+}
+
+.text-field {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}
+.text-field:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+}

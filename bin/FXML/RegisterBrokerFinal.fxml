@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane id="left-pane-default" fx:id="leftPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.RegisterBrokerFinalController">
+   <children>
+      <TextField fx:id="first_name" layoutX="82.0" layoutY="88.0" prefHeight="39.0" prefWidth="357.0" promptText="Enter Your First Name">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="last_name" layoutX="82.0" layoutY="145.0" prefHeight="39.0" prefWidth="357.0" promptText="Enter Your Last Name">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="address" layoutX="80.0" layoutY="199.0" prefHeight="39.0" prefWidth="589.0" promptText="Enter Your Address">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="phone_number" layoutX="82.0" layoutY="252.0" prefHeight="39.0" prefWidth="357.0" promptText="Enter Your Phone Number">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="email" layoutX="82.0" layoutY="304.0" onAction="#register" prefHeight="39.0" prefWidth="357.0" promptText="Enter Your E-mail Address">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button id="log-in" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="207.0" text="Register" />
+      <Button id="clear-button" fx:id="clearButton" layoutX="374.0" layoutY="425.0" mnemonicParsing="false" onAction="#clearUser" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+      <Label fx:id="statusLabel" layoutX="75.0" layoutY="355.0" prefHeight="54.0" prefWidth="645.0" wrapText="true">
+         <font>
+            <Font name="Consolas" size="13.0" />
+         </font>
+      </Label>
+      <Label id="little-label" layoutX="66.0" layoutY="27.0" prefHeight="45.0" prefWidth="424.0" text="To Finalize Registration We Need:" />
+      <Label id="big-label" fx:id="successLabel" layoutX="32.0" layoutY="209.0" prefHeight="115.0" prefWidth="658.0" />
+   </children>
+</Pane>
