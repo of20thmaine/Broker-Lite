@@ -39,6 +39,12 @@
     -fx-padding: 5 40 5 40;
 }
 
+#log-in:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #c63d3d;
+	-fx-border-color: #c63d3d;
+}
+
 #clear-button {
 	-fx-border-color: #FFFFFF;
 	-fx-border-width: 1;

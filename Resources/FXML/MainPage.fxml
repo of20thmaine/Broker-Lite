@@ -67,11 +67,11 @@
             <VBox id="side-menu" fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
          </left>
          <center>
-            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="Market" />
-              </tabs>
-            </TabPane>
+            <AnchorPane>
+               <children>
+                  <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
+               </children>
+            </AnchorPane>
          </center>
          <bottom>
             <HBox id="footer" prefHeight="26.0" prefWidth="1000.0" BorderPane.alignment="CENTER">

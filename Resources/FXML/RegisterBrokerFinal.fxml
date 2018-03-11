@@ -28,14 +28,14 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Button id="log-in" layoutX="471.0" layoutY="415.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="207.0" text="Register" />
-      <Button id="clear-button" fx:id="clearButton" layoutX="374.0" layoutY="425.0" mnemonicParsing="false" onAction="#clearUser" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+      <Button id="log-in" layoutX="334.0" layoutY="415.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="344.0" text="Complete Registration" />
+      <Button id="clear-button" fx:id="clearButton" layoutX="238.0" layoutY="425.0" mnemonicParsing="false" onAction="#clearUser" prefHeight="25.0" prefWidth="81.0" text="Clear" />
       <Label fx:id="statusLabel" layoutX="75.0" layoutY="355.0" prefHeight="54.0" prefWidth="645.0" wrapText="true">
          <font>
             <Font name="Consolas" size="13.0" />
          </font>
       </Label>
       <Label id="little-label" layoutX="66.0" layoutY="27.0" prefHeight="45.0" prefWidth="424.0" text="To Finalize Registration We Need:" />
-      <Label id="big-label" fx:id="successLabel" layoutX="32.0" layoutY="209.0" prefHeight="115.0" prefWidth="658.0" />
+      <Label id="big-label" fx:id="successLabel" layoutX="41.0" layoutY="176.0" prefHeight="115.0" prefWidth="658.0" />
    </children>
 </Pane>

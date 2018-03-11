@@ -1,5 +1,6 @@
 package brokerlite;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -53,6 +54,20 @@ public class MainPageController implements Initializable {
 		HBox.setHgrow(menu, Priority.ALWAYS);
 		isConnected.setText("Connection Established");
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
+		
+		
+		FXMLLoader loader = new FXMLLoader(
+			    getClass().getResource("/FXML/MarketTab.fxml"));
+		
+		try {
+			Tab market = new Tab("Market");
+			market.setContent((ScrollPane)loader.load());
+			
+			tabPane.getTabs().add(market);
+			tabPane.getSelectionModel().select(market);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void postInitialize(UserModel user) {
@@ -69,19 +84,28 @@ public class MainPageController implements Initializable {
 	}
 	
 	private void displayCustomers() {
+		sideMenu.setSpacing(5.0);
+		
 		for(Customer c : customers) {
 			Button b = new Button();
 			b.setId("customer-button");
 			b.setText(c.getName() + "\n" + c.getCash());
 			b.setMaxWidth(Double.MAX_VALUE);
 			
+			FXMLLoader loader = new FXMLLoader(
+				    getClass().getResource("/FXML/CustomerTab.fxml"));
+			
 			 b.setOnAction(new EventHandler<ActionEvent>() {
 		            @Override
 		            public void handle(ActionEvent event) {
-		            	Tab tab = new Tab();
-		        		tab.setText(c.getName());
-		        		tabPane.getTabs().add(tab);
-		        		tabPane.getSelectionModel().select(tab);
+		            	try {
+		        			Tab customerTab = new Tab(c.getName());
+		        			customerTab.setContent((ScrollPane)loader.load());
+		        			tabPane.getTabs().add(customerTab);
+		        			tabPane.getSelectionModel().select(customerTab);
+		        		} catch (IOException e) {
+		        			e.printStackTrace();
+		        		}
 		            }
 		        });
 			

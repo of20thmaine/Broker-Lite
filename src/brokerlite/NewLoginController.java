@@ -45,8 +45,8 @@ public class NewLoginController implements Initializable {
 				Stage primaryStage = new Stage();
 				primaryStage.setTitle("Broker-Lite");
 				primaryStage.getIcons().add(new Image("/img/icon.png"));
-				primaryStage.setMinHeight(600);
-				primaryStage.setMinWidth(1000);
+				primaryStage.setMinHeight(650);
+				primaryStage.setMinWidth(1050);
 				
 				FXMLLoader loader = new FXMLLoader();
 				Pane root = loader.load(getClass().getResource("/FXML/MainPage.fxml").openStream());
