@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="592.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   	<stylesheets>
+    	<URL value="@/css/tab.css" />
+	</stylesheets>
+   <content>
+      <AnchorPane>
+         <children>
+            <Group AnchorPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="563.0" prefWidth="640.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Pane id="register-pane" maxWidth="300.0" prefHeight="100.0" prefWidth="67.0" HBox.hgrow="ALWAYS" />
+                              <Label id="title" prefHeight="100.0" prefWidth="542.0" text="Register Customer to Your Account:" HBox.hgrow="NEVER" />
+                              <Pane id="register-pane" prefHeight="100.0" prefWidth="171.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane id="register-pane" prefHeight="100.0" prefWidth="323.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label id="prompt-label" layoutX="62.0" layoutY="27.0" prefHeight="47.0" prefWidth="267.0" text="Enter Customer First Name:" />
+                                 </children>
+                              </Pane>
+                              <Pane id="register-pane" prefHeight="100.0" prefWidth="376.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <TextField layoutX="14.0" layoutY="31.0" prefHeight="38.0" prefWidth="322.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                        <Pane id="register-pane" prefHeight="370.0" prefWidth="636.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

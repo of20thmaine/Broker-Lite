@@ -55,19 +55,7 @@ public class MainPageController implements Initializable {
 		isConnected.setText("Connection Established");
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
 		
-		
-		FXMLLoader loader = new FXMLLoader(
-			    getClass().getResource("/FXML/MarketTab.fxml"));
-		
-		try {
-			Tab market = new Tab("Market");
-			market.setContent((ScrollPane)loader.load());
-			
-			tabPane.getTabs().add(market);
-			tabPane.getSelectionModel().select(market);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.displayMarkeyTab();
 	}
 	
 	public void postInitialize(UserModel user) {
@@ -131,6 +119,38 @@ public class MainPageController implements Initializable {
 			
 			primaryStage.show();
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void displayMarkeyTab() {
+		FXMLLoader loader = new FXMLLoader(
+			    getClass().getResource("/FXML/MarketTab.fxml"));
+		
+		try {
+			Tab market = new Tab("Market");
+			market.setContent((ScrollPane)loader.load());
+			
+			tabPane.getTabs().add(market);
+			tabPane.getSelectionModel().select(market);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	private void displayCustomerRegistration() {
+		FXMLLoader loader = new FXMLLoader(
+			    getClass().getResource("/FXML/CustomerRegistration.fxml"));
+		
+		try {
+			Tab customerRegister = new Tab("Register Customer");
+			customerRegister.setContent((ScrollPane)loader.load());
+			
+			tabPane.getTabs().add(customerRegister);
+			tabPane.getSelectionModel().select(customerRegister);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -63,3 +63,7 @@
 .text-field:focused {
     -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
 }
+
+.scroll-pane {
+    -fx-background-color:transparent;
+}

@@ -30,17 +30,19 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Broker-Lite">
                         <items>
+                              <MenuItem mnemonicParsing="false" onAction="#displayMarkeyTab" text="Display Market Tab" />
                           <MenuItem mnemonicParsing="false" onAction="#platformExit" text="Exit" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Customer">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Register Customer" />
+                          <MenuItem mnemonicParsing="false" onAction="#displayCustomerRegistration" text="Register Customer" />
                               <MenuItem mnemonicParsing="false" text="Remove Customer" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#displayMarkeyTab" text="Display Market Tab" />
                               <MenuItem mnemonicParsing="false" text="Preferences" />
                           </items>
                         </Menu>
@@ -64,7 +66,7 @@
             </HBox>
          </top>
          <left>
-            <VBox id="side-menu" fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
+            <VBox id="side-menu" fx:id="sideMenu" prefHeight="538.0" prefWidth="183.0" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <AnchorPane>
