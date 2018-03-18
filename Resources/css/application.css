@@ -42,6 +42,7 @@
 
 #side-menu {
 	-fx-padding: 30 10 5 5;
+	-fx-background-color: #5c5656;
 }
 
 #customer-button {
@@ -186,4 +187,36 @@
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
     -fx-text-fill: white;
+}
+
+/*LEFT SCROLL PANE */
+
+.scroll-pane {
+    -fx-background-color: #3c3c3c;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #3c3c3c;
 }

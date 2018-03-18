@@ -12,23 +12,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.CustomerRegistrationController">
+<ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="${scrollPane.parent.height}" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.CustomerRegistrationController">
    	<stylesheets>
     	<URL value="@/css/tab.css" />
 	</stylesheets>
    <content>
       <AnchorPane id="background-pane">
          <children>
-            <AnchorPane id="main-pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane id="main-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="800.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                        <VBox prefHeight="${scrollPane.parent.height}" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                         <VBox prefWidth="700.0" HBox.hgrow="SOMETIMES">
                            <children>
                               <Label id="title" alignment="CENTER" prefHeight="126.0" prefWidth="397.0" text="Register Customer:" />
                               <Pane fx:id="mainPane" prefHeight="700.0" prefWidth="699.0">
                                  <children>
+                                    <Label id="big-label" fx:id="successLabel" focusTraversable="false" layoutY="213.0" prefHeight="203.0" prefWidth="696.0" />
                                     <Label id="prompt-label" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="271.0" text="Enter Customer First Name:" />
                                     <TextField fx:id="first_name" layoutX="27.0" layoutY="60.0" prefHeight="25.0" prefWidth="420.0" promptText="First Name">
                                        <font>
@@ -73,13 +74,12 @@
                                           <Font name="Consolas" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label id="big-label" fx:id="successLabel" layoutY="213.0" prefHeight="203.0" prefWidth="696.0" />
                                  </children>
                               </Pane>
-                              <VBox prefHeight="13.0" prefWidth="694.0" VBox.vgrow="ALWAYS" />
+                              <VBox prefHeight="5.0" prefWidth="694.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="800.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                        <VBox prefHeight="${scrollPane.parent.height}" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>

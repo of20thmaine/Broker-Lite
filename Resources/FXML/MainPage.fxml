@@ -66,7 +66,11 @@
             </HBox>
          </top>
          <left>
-            <VBox id="side-menu" fx:id="sideMenu" prefHeight="538.0" prefWidth="183.0" BorderPane.alignment="CENTER" />
+            <ScrollPane hbarPolicy="NEVER" prefViewportHeight="538.0" prefViewportWidth="183.0">
+               <content>
+                  <VBox id="side-menu" fx:id="sideMenu" prefWidth="183.0" BorderPane.alignment="CENTER" />
+               </content>
+            </ScrollPane>
          </left>
          <center>
             <AnchorPane>
