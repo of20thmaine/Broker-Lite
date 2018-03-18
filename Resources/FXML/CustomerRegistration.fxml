@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.scene.*?>
@@ -12,43 +12,78 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="592.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToWidth="true" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="brokerlite.CustomerRegistrationController">
    	<stylesheets>
     	<URL value="@/css/tab.css" />
 	</stylesheets>
    <content>
-      <AnchorPane>
+      <AnchorPane id="background-pane">
          <children>
-            <Group AnchorPane.alignment="CENTER">
+            <AnchorPane id="main-pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox prefHeight="563.0" prefWidth="640.0">
+                  <HBox prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
+                        <VBox prefHeight="800.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
+                        <VBox prefWidth="700.0" HBox.hgrow="SOMETIMES">
                            <children>
-                              <Pane id="register-pane" maxWidth="300.0" prefHeight="100.0" prefWidth="67.0" HBox.hgrow="ALWAYS" />
-                              <Label id="title" prefHeight="100.0" prefWidth="542.0" text="Register Customer to Your Account:" HBox.hgrow="NEVER" />
-                              <Pane id="register-pane" prefHeight="100.0" prefWidth="171.0" HBox.hgrow="ALWAYS" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Pane id="register-pane" prefHeight="100.0" prefWidth="323.0" HBox.hgrow="ALWAYS">
+                              <Label id="title" alignment="CENTER" prefHeight="126.0" prefWidth="397.0" text="Register Customer:" />
+                              <Pane fx:id="mainPane" prefHeight="700.0" prefWidth="699.0">
                                  <children>
-                                    <Label id="prompt-label" layoutX="62.0" layoutY="27.0" prefHeight="47.0" prefWidth="267.0" text="Enter Customer First Name:" />
+                                    <Label id="prompt-label" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="271.0" text="Enter Customer First Name:" />
+                                    <TextField fx:id="first_name" layoutX="27.0" layoutY="60.0" prefHeight="25.0" prefWidth="420.0" promptText="First Name">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label id="prompt-label" layoutX="14.0" layoutY="109.0" prefHeight="46.0" prefWidth="271.0" text="Enter Customer Last Name:" />
+                                    <TextField fx:id="last_name" layoutX="27.0" layoutY="155.0" prefHeight="25.0" prefWidth="420.0" promptText="Last Name">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label id="prompt-label" layoutX="27.0" layoutY="206.0" prefHeight="46.0" prefWidth="211.0" text="Enter Customer E-mail:" />
+                                    <TextField fx:id="email" layoutX="27.0" layoutY="252.0" prefHeight="25.0" prefWidth="420.0" promptText="Email">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label id="prompt-label" layoutX="27.0" layoutY="303.0" prefHeight="46.0" prefWidth="292.0" text="Enter Customer Phone Number:" />
+                                    <TextField fx:id="phone_number" layoutX="28.0" layoutY="349.0" prefHeight="25.0" prefWidth="420.0" promptText="Phone Number">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label id="prompt-label" layoutX="29.0" layoutY="399.0" prefHeight="46.0" prefWidth="289.0" text="Enter Customer Home Address:" />
+                                    <TextField fx:id="address" layoutX="27.0" layoutY="445.0" prefHeight="37.0" prefWidth="649.0" promptText="Home Address">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <TextField fx:id="investment" layoutX="48.0" layoutY="544.0" onAction="#register" prefHeight="37.0" prefWidth="271.0" promptText="1000.00">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label id="prompt-label" layoutX="27.0" layoutY="498.0" prefHeight="46.0" prefWidth="164.0" text="Initial Investment:" />
+                                    <Label id="prompt-label" layoutX="17.0" layoutY="540.0" prefHeight="46.0" prefWidth="25.0" text="\$" />
+                                    <Button id="clear-button" fx:id="clearButton" layoutX="352.0" layoutY="609.0" mnemonicParsing="false" onAction="#clearUser" prefHeight="25.0" prefWidth="81.0" text="Clear" />
+                                    <Button id="log-in" layoutX="447.0" layoutY="599.0" mnemonicParsing="false" onAction="#register" prefHeight="45.0" prefWidth="207.0" text="Register" />
+                                    <Label id="prompt-label" fx:id="statusLabel" layoutY="595.0" prefHeight="86.0" prefWidth="348.0" wrapText="true">
+                                       <font>
+                                          <Font name="Consolas" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="big-label" fx:id="successLabel" layoutY="213.0" prefHeight="203.0" prefWidth="696.0" />
                                  </children>
                               </Pane>
-                              <Pane id="register-pane" prefHeight="100.0" prefWidth="376.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <TextField layoutX="14.0" layoutY="31.0" prefHeight="38.0" prefWidth="322.0" />
-                                 </children>
-                              </Pane>
+                              <VBox prefHeight="13.0" prefWidth="694.0" VBox.vgrow="ALWAYS" />
                            </children>
-                        </HBox>
-                        <Pane id="register-pane" prefHeight="370.0" prefWidth="636.0" VBox.vgrow="ALWAYS" />
+                        </VBox>
+                        <VBox prefHeight="800.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </Group>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </content>

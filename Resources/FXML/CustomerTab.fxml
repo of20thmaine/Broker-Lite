@@ -11,8 +11,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane id="main-pane" fitToHeight="true" fitToWidth="true" prefHeight="674.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="527.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    	<stylesheets>
     	<URL value="@/css/tab.css" />
 	</stylesheets>
+   <content>
+      <AnchorPane id="background-pane">
+         <children>
+            <AnchorPane id="main-pane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox prefHeight="525.0" prefWidth="224.0" HBox.hgrow="ALWAYS" />
+                        <VBox prefHeight="525.0" prefWidth="374.0">
+                           <children>
+                              <Label id="title" alignment="CENTER" prefHeight="129.0" prefWidth="357.0" text="Customer:" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="525.0" prefWidth="205.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </content>
 </ScrollPane>

@@ -2,6 +2,7 @@ package brokerlite;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -61,8 +62,6 @@ public class MainPageController implements Initializable {
 	public void postInitialize(UserModel user) {
 		userModel = user;
 		this.displayUser();
-		
-		customers = userModel.getCustomers();
 	    	
 	    this.displayCustomers();
 	}
@@ -72,6 +71,9 @@ public class MainPageController implements Initializable {
 	}
 	
 	private void displayCustomers() {
+		customers = userModel.getCustomers();
+		
+		sideMenu.getChildren().clear();
 		sideMenu.setSpacing(5.0);
 		
 		for(Customer c : customers) {
@@ -89,10 +91,16 @@ public class MainPageController implements Initializable {
 		            	try {
 		        			Tab customerTab = new Tab(c.getName());
 		        			customerTab.setContent((ScrollPane)loader.load());
+		        			
+		        			customerTab.setOnClosed(e -> { 
+		        				displayCustomers();
+		        				e.consume();
+		        			});
+		        			
 		        			tabPane.getTabs().add(customerTab);
 		        			tabPane.getSelectionModel().select(customerTab);
 		        		} catch (IOException e) {
-		        			e.printStackTrace();
+		        			System.out.println("Duplicate tab handled.");
 		        		}
 		            }
 		        });
@@ -131,6 +139,7 @@ public class MainPageController implements Initializable {
 		try {
 			Tab market = new Tab("Market");
 			market.setContent((ScrollPane)loader.load());
+			market.setOnClosed(e -> { e.consume(); });
 			
 			tabPane.getTabs().add(market);
 			tabPane.getSelectionModel().select(market);
@@ -146,7 +155,13 @@ public class MainPageController implements Initializable {
 		
 		try {
 			Tab customerRegister = new Tab("Register Customer");
-			customerRegister.setContent((ScrollPane)loader.load());
+			ScrollPane content = (ScrollPane)loader.load();
+			content.prefWidthProperty().bind(tabPane.widthProperty());
+			content.prefHeightProperty().bind(tabPane.heightProperty());
+			customerRegister.setContent(content);
+			
+			CustomerRegistrationController c = (CustomerRegistrationController) loader.getController();
+			c.initializer(this);
 			
 			tabPane.getTabs().add(customerRegister);
 			tabPane.getSelectionModel().select(customerRegister);
@@ -159,5 +174,19 @@ public class MainPageController implements Initializable {
 	private void platformExit() {
 		Platform.exit();
 	}
+	
+	public boolean registerCustomer(String lname, String fname, String phoneNum, String email, String address, double investAmount) {
+		try {
+			if (userModel.registerCustomer(lname, fname, phoneNum, email, address, investAmount)) {
+				this.displayCustomers();
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+	
 	
 }

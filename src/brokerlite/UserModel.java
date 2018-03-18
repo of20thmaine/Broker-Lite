@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class UserModel {
 	
@@ -74,7 +75,7 @@ public class UserModel {
 	public boolean authenticateUser(String user, String password) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "SELECT * FROM credentials WHERE username = ? and password = ?;";
+		String query = "SELECT * FROM credentials WHERE username = ? and password = ?";
 		
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -103,7 +104,7 @@ public class UserModel {
 		customers.clear();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "SELECT * FROM client WHERE id IN (SELECT client_id FROM relationship WHERE broker_id = ?);";
+		String query = "SELECT * FROM client WHERE id IN (SELECT client_id FROM relationship WHERE broker_id = ?)";
 		
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -133,7 +134,7 @@ public class UserModel {
 	public void populateUserData() throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "SELECT * FROM broker WHERE id= ?;";
+		String query = "SELECT * FROM broker WHERE id= ?";
 		
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -156,12 +157,101 @@ public class UserModel {
 		}
 	}
 	
-	// WIll add customer registration here future.
-	public void registerCustomer() {
+	public boolean registerCustomer(String lname, String fname, String phoneNum, String email, String address, double investAmount) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO client (id, last_name, first_name, phone_num, email, address, cash) VALUES (?,?,?,?,?,?,?)";
 		
+		int key = this.generateCustomerKey();
+		
+		while(this.isKeyUsed(key)) {
+			key = this.generateCustomerKey();
+		}
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setInt(1, key);
+			preparedStatement.setString(2, lname);
+			preparedStatement.setString(3, fname);
+			preparedStatement.setString(4, phoneNum);
+			preparedStatement.setString(5, email);
+			preparedStatement.setString(6, address);
+			preparedStatement.setDouble(7, investAmount);
+			
+			preparedStatement.execute();
+			
+			if (this.insertRelationship(key)) {
+				return true;
+			}
+			
+			return false;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			preparedStatement.close();
+		}
+	}
+	
+	public boolean insertRelationship(int key) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT INTO relationship (broker_id,client_id) VALUES (?,?)";
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, key);
+			
+			preparedStatement.execute();
+			
+			return true;
+			
+		} catch(Exception e) {
+			return false;
+		} finally {
+			preparedStatement.close();
+		}
+	}
+	
+	private boolean isKeyUsed(int key) throws SQLException {
+		PreparedStatement preparedStatement = null;
+		String query =  "SELECT EXISTS(SELECT 1 FROM client WHERE id=? LIMIT 1)";
+		ResultSet resultSet = null;
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, key);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				int truthiness = resultSet.getInt(1);
+				
+				if (truthiness == 1) {
+					return true;
+				}
+			} 
+			return false;
+		} catch(Exception e) {
+			return false;
+		} finally {
+			preparedStatement.close();
+			resultSet.close();
+		}
+	}
+	
+	private int generateCustomerKey() {
+		return ThreadLocalRandom.current().nextInt(10000, 100000);
 	}
 	
 	public ArrayList<Customer> getCustomers() {
+		try {
+			this.populateCustomers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return customers;
 	}
 	
