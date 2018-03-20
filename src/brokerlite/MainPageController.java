@@ -3,11 +3,11 @@ package brokerlite;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 public class MainPageController implements Initializable {
 	
 	private UserModel userModel;
-	private ArrayList<Customer> customers;
+	private ObservableList<Customer> customers;
 	
 	@FXML
 	private Label isConnected;
@@ -55,15 +55,13 @@ public class MainPageController implements Initializable {
 		HBox.setHgrow(menu, Priority.ALWAYS);
 		isConnected.setText("Connection Established");
 		tabPane.setTabClosingPolicy(TabClosingPolicy.ALL_TABS);
-		
-		this.displayMarkeyTab();
 	}
 	
 	public void postInitialize(UserModel user) {
 		userModel = user;
 		this.displayUser();
-	    	
 	    this.displayCustomers();
+	    this.displayMarkeyTab();
 	}
 	
 	private void displayUser() {
@@ -71,7 +69,7 @@ public class MainPageController implements Initializable {
 	}
 	
 	private void displayCustomers() {
-		customers = userModel.getCustomers();
+		customers = FXCollections.observableArrayList(userModel.getCustomers());
 		
 		sideMenu.getChildren().clear();
 		sideMenu.setSpacing(5.0);
@@ -82,30 +80,38 @@ public class MainPageController implements Initializable {
 			b.setText(c.getName() + "\n" + c.getCash());
 			b.setMaxWidth(Double.MAX_VALUE);
 			
+			b.setOnAction( e -> {
+				this.generateCustomerTab(c);
+			});
+			
+			sideMenu.getChildren().add(b);
+		}
+	}
+	
+	private void generateCustomerTab(Customer c) {
+		try {
 			FXMLLoader loader = new FXMLLoader(
 				    getClass().getResource("/FXML/CustomerTab.fxml"));
 			
-			 b.setOnAction(new EventHandler<ActionEvent>() {
-		            @Override
-		            public void handle(ActionEvent event) {
-		            	try {
-		        			Tab customerTab = new Tab(c.getName());
-		        			customerTab.setContent((ScrollPane)loader.load());
-		        			
-		        			customerTab.setOnClosed(e -> { 
-		        				displayCustomers();
-		        				e.consume();
-		        			});
-		        			
-		        			tabPane.getTabs().add(customerTab);
-		        			tabPane.getSelectionModel().select(customerTab);
-		        		} catch (IOException e) {
-		        			System.out.println("Duplicate tab handled.");
-		        		}
-		            }
-		        });
+			CustomerTabController controller = new CustomerTabController();
+			loader.setController(controller);
 			
-			sideMenu.getChildren().add(b);
+			Tab customerTab = new Tab(c.getName());
+			
+			ScrollPane tabScroller = (ScrollPane)loader.load();
+			customerTab.setContent(tabScroller);
+
+			customerTab.setOnClosed(e -> { 
+				displayCustomers();
+				e.consume();
+			});
+			
+			tabPane.getTabs().add(customerTab);
+			tabPane.getSelectionModel().select(customerTab);
+			
+			controller.initializer(c);
+		} catch (IOException e) {
+			System.out.println("Duplicate tab handled.");
 		}
 	}
 	

@@ -3,7 +3,7 @@
 }
 
 .label {
-	-fx-font-family: "Helvetica";
+	-fx-font-family: "Futura";
     -fx-text-fill: #FFFFFF;
     -fx-alignment:center;
     -fx-font-size: 16 px;
@@ -32,7 +32,7 @@
 	-fx-background-radius: 12 12 12 12;
 	-fx-border-width: 2 2 2 2;
 	-fx-background-color: #c63d3d;
-	-fx-font-family: "Helvetica";
+	-fx-font-family: "Futura";
     -fx-font-size: 26 px;
     -fx-font-weight: 100;
     -fx-text-fill: #FFFFFF;
@@ -50,7 +50,7 @@
 	-fx-border-width: 1;
 	-fx-border-radius: 12 12 12 12;
 	-fx-background-color: transparent;
-	-fx-font-family: "Helvetica";
+	-fx-font-family: "Futura";
     -fx-font-size: 12 px;
     -fx-font-weight: 100;
     -fx-text-fill: #FFFFFF;
