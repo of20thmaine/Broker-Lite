@@ -19,7 +19,7 @@ public class Main extends Application {
 			primaryStage.setMinWidth(1000);
 			primaryStage.setResizable(false);
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/FXML/newLogin.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/FXML/NewLogin.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/login.css").toExternalForm());
 			primaryStage.setScene(scene);

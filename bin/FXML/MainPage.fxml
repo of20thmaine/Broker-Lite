@@ -30,17 +30,19 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Broker-Lite">
                         <items>
+                              <MenuItem mnemonicParsing="false" onAction="#displayMarkeyTab" text="Display Market Tab" />
                           <MenuItem mnemonicParsing="false" onAction="#platformExit" text="Exit" />
                         </items>
                       </Menu>
                       <Menu mnemonicParsing="false" text="Customer">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Register Customer" />
+                          <MenuItem mnemonicParsing="false" onAction="#displayCustomerRegistration" text="Register Customer" />
                               <MenuItem mnemonicParsing="false" text="Remove Customer" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#displayMarkeyTab" text="Display Market Tab" />
                               <MenuItem mnemonicParsing="false" text="Preferences" />
                           </items>
                         </Menu>
@@ -64,19 +66,23 @@
             </HBox>
          </top>
          <left>
-            <VBox id="side-menu" fx:id="sideMenu" prefHeight="536.0" prefWidth="163.0" BorderPane.alignment="CENTER" />
+            <ScrollPane hbarPolicy="NEVER" prefViewportHeight="538.0" prefViewportWidth="200.0">
+               <content>
+                  <VBox id="side-menu" fx:id="sideMenu" prefWidth="${sideMenu.parent.width}" BorderPane.alignment="CENTER" />
+               </content>
+            </ScrollPane>
          </left>
          <center>
-            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="Market" />
-              </tabs>
-            </TabPane>
+            <AnchorPane>
+               <children>
+                  <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="Infinity" prefWidth="Infinity" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER" />
+               </children>
+            </AnchorPane>
          </center>
          <bottom>
             <HBox id="footer" prefHeight="26.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="26.0" prefWidth="50.0" text="Status: " textFill="WHITE">
+                  <Label prefHeight="26.0" prefWidth="66.0" text="     Status: " textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
