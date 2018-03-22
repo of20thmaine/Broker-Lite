@@ -31,6 +31,16 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+//		StockModel sm = new StockModel();
+//		try {
+//			sm.grabStockSymbols();
+//			sm.getAPI();
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		launch(args);
 	}
 }

@@ -4,9 +4,9 @@ people = ["id","last_name","first_name"]
 broker = ["id","last_name","first_name","phone_num","email","address"]
 client = ["id","last_name","first_name","phone_num","email","address","cash"]
 credentials = ["username","password"]
-stock = ["name","opening_price","closing_price","change"]
+stock = ["name","date_time","index_value","high","low"]
 relationship = ["broker_id","client_id"]
-stock_owned = ["client_id","stock_name","amt_shares"]
+stock_owned = ["client_id","stock_name","shares"]
 identity = ["username","user_id"]
 
 user_id = [27043, 51051, 70839, 65928, 55187, 31543, 76285, 92192, 82338, 19337, 13512, 11466, 32473, 53704, 87505, 83886, 37641, 25997, 20163, 14687]
@@ -27,13 +27,13 @@ password = ["p4ScNtGGL_", "nv_20Ij#j5", "iA9+zgD=df", "q3MO%H690Z", "cv1qK^_zEJ"
 
 cash = [18572, 419, 38395, 27836, 12623, 72012, 66984, 82034, 55983, 17717, 72200, 31076, 91786, 68014, 43620, 2434, 99828, 67541, 79139, 14447]
 
-stockName = ["AAPL","GOOG","MSFT","FB","TSM","ORCL","CSCO","IBM","NVDA"]
+stockName = ["XQC", "XNDXT25NNR", "XNDXT25NNER", "XNDXT25E", "XNDXT25", "XNDXS2NNR", "XNDXS2", "XNDXS1NNR", "XNDXS1", "XNDXNNRS3", "XNDXNNRGBP", "XNDXNNRHKD", "XNDXNNREUR", "XNDXNNRCHF", "XNDXNNRCAD", "XNDXL3TR", "XNDXL", "XNDXHKD", "XNDXGBPMH", "XNDXGBP", "XNDXEURMH", "XNDXCHFMH", "XNDXEUR", "XNDXCHF", "XNDXCAD", "XNBINNR", "XCMPNNR"]
 
-openingPrice = [93869, 60057, 65437, 85887, 9123, 6526, 49923, 27797, 8366]
+openingPrice = [93869, 60057, 65437, 85887, 9123, 6526, 49923, 27797, 8366,93869, 60057, 65437, 85887, 9123, 6526, 49923, 27797, 8366,93869, 60057, 65437, 85887, 9123, 6526, 49923, 2779, 652234]
 
-closingPrice = [34907, 60542, 22546, 40320, 96387, 27267, 82497, 47890, 93029]
+closingPrice = [34907, 60542, 22546, 40320, 96387, 27267, 82497, 47890, 93029,34907, 60542, 22546, 40320, 96387, 27267, 82497, 47890, 93029,34907, 60542, 22546, 40320, 96387, 27267, 82497, 47890, 93029]
 
-percentChange = [-590, 4, -429, -456, 872, 207, 325, 200, 846]
+percentChange = [-590, 4, -429, -456, 872, 207, 325, 200, 846,-590, 4, -429, -456, 872, 207, 325, 200, 846,-590, 4, -429, -456, 872, 207, 325, 200, 846]
 
 
 
@@ -69,9 +69,9 @@ file = open("sampleData.sql","w")
 """
 Populates people table
 """
-for i in range(len(user_id)):
+"""for i in range(len(user_id)):
     file.write("INSERT INTO people ("+people[0]+","+people[1]+","+people[2]+") VALUES ("+str(user_id[i])+",\""+lastName[i]+"\",\""+firstName[i]+"\");\n")
-
+"""
 """
 Populates broker table
 """
@@ -94,7 +94,7 @@ for creds in range(len(username)):
 Populates stock table
 """
 for s in range(len(stockName)):
-    file.write("INSERT INTO stock ("+stock[0]+","+stock[1]+","+ stock[2]+","+ stock[3]+") VALUES (\""+stockName[s]+"\","+str(openingPrice[s])+","+str(closingPrice[s])+","+str(percentChange[0])+");\n")
+    file.write("INSERT INTO stock VALUES (\""+stockName[s]+"\",2018-03-19,"+str(percentChange[s])+","+str(openingPrice[s])+","+str(closingPrice[s])+");\n")
 
 """
 Populates relationship table
@@ -118,9 +118,9 @@ for so in range(numStocksTotal):
 """
 Populates identity table
 """
-
+"""
 for ident in range(len(user_id)):
     file.write("INSERT INTO identity ("+identity[0]+","+identity[1]+") VALUES (\""+username[ident]+"\","+str(user_id[ident])+");\n")
-
+"""
 file.close()
 

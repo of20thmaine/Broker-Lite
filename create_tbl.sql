@@ -25,10 +25,10 @@ CREATE TABLE client (
 CREATE TABLE stock (
 	name TEXT,
 	date_time TEXT,
-	opening_price REAL NOT NULL,
-	current_price REAL NOT NULL,
-    change REAL NOT NULL,
-	PRIMARY KEY (name)
+    index_value REAL NOT NULL,
+	high REAL NOT NULL,
+	low REAL NOT NULL,
+	PRIMARY KEY (name,date_time)
 );
 
 CREATE TABLE broker (
