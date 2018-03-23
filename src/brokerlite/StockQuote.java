@@ -1,14 +1,10 @@
 package brokerlite;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 
 @XmlRootElement(name="StockQuote")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -16,7 +12,7 @@ public class StockQuote {
  
 //    private String name;
 //    private String symbol;
-    private Date date;
+    private String date;
     private double high;
     private double low;
     private double indexPrice;
@@ -26,14 +22,10 @@ public class StockQuote {
     	this.high = high;
     	this.low = low;
     	this.indexPrice = indexVal;
-    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+//    	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
     	
-    	try {
-			this.date = formatter.parse(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	this.date = date;
+    	
     }
     
  
@@ -49,7 +41,7 @@ public class StockQuote {
     	return this.high;
     }
     
-    public Date getDate() {
+    public String getDate() {
     	return this.date;
     }
  

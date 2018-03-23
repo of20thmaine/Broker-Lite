@@ -1,6 +1,8 @@
 package brokerlite;
 	
+
 import javafx.application.Application;
+//import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -25,22 +27,32 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		/**
+		 * Not multithreading correctly.
+		 */
+		
+		StockModel sm = new StockModel();
+		sm.startUpdate();
+//		
+//		Task<Void> task = new Task<Void> () {
+//			@Override
+//			public Void call() throws Exception {
+//				System.out.println("Test");
+//				
+//				return null;
+//			}
+//		};
+//		
+//		new Thread(task).run();
 	}
 	
 	public static void main(String[] args) {
-//		StockModel sm = new StockModel();
-//		try {
-//			sm.grabStockSymbols();
-//			sm.getAPI();
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		launch(args);
 	}
 }

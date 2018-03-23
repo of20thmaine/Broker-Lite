@@ -8,14 +8,21 @@ public class Stock {
 	private String symbol;
 	List<StockQuote> stock_quotes = new ArrayList<StockQuote>();
 	
-	public void setSymbol(String symbol) {
+	public Stock(String symbol) {
 		this.symbol = symbol;
 	}
 	
+	public String getSymbol() {
+		return this.symbol;
+	}
+	
+	/**
+	 * Outputs to sys.out for now. Can change to give back a list of values.
+	 */
 	public void getDetails() {
 		System.out.println(this.symbol);
 		for(StockQuote sq: stock_quotes) {
-			System.out.println(sq);
+			System.out.println(sq+"\n");
 		}
 	}
 	
