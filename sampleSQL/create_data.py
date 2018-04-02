@@ -88,7 +88,7 @@ for c in range(brokers,len(user_id)):
 Populates credentials table
 """
 for creds in range(len(username)):
-    file.write("INSERT INTO credentials ("+credentials[0]+","+credentials[1]+") VALUES (\""+username[creds]+"\",\""+password[creds]+"\");\n")
+    file.write("INSERT INTO credentials VALUES ("+str(user_id[creds])+",\""+username[creds]+"\",\""+password[creds]+"\");\n")
 
 """
 Populates stock table
