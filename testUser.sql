@@ -1,4 +1,4 @@
-INSERT INTO credentials (broker_id,username,password) VALUES (1111, "test", "test");
+INSERT INTO credentials (id,username,password) VALUES (1111, "test", "test");
 
 INSERT INTO broker (id,last_name,first_name,phone_num,email,address) VALUES (1111,"Doe","John","5555555555","john.doe@test.com","123 Fake St.");
 
