@@ -16,7 +16,7 @@
     	<URL value="@/css/tab.css" />
 	</stylesheets>
    <content>
-      <AnchorPane fx:id="backgroundPane" id="background-pane" prefHeight="${backgroundPane.parent.height}" prefWidth="${backgroundPane.parent.width}">
+      <AnchorPane id="background-pane" fx:id="backgroundPane" prefHeight="${backgroundPane.parent.height}" prefWidth="${backgroundPane.parent.width}">
          <children>
             <AnchorPane id="main-pane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -25,7 +25,8 @@
                         <VBox prefHeight="600.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
                         <VBox prefHeight="600.0" prefWidth="780.0">
                            <children>
-                              <Label fx:id="titleLabel" id="title" alignment="CENTER" prefHeight="129.0" prefWidth="780.0" text="Current Market Data:" />
+                              <Label id="title" fx:id="titleLabel" alignment="CENTER" prefHeight="129.0" prefWidth="780.0" text="Current Market Data:" />
+                              <VBox fx:id="stockList" prefHeight="459.0" prefWidth="779.0" />
                            </children>
                         </VBox>
                         <VBox prefHeight="600.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />

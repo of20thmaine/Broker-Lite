@@ -32,7 +32,7 @@ public class Stock {
 	
 	@Override
 	public String toString() {
-		return this.symbol; 
+		return symbol + "\n" + stock_quotes.get(stock_quotes.size()-1).toString(); 
 	}
 	
 }

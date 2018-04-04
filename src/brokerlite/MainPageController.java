@@ -17,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -24,6 +26,7 @@ import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,6 +34,7 @@ import javafx.stage.Stage;
 public class MainPageController implements Initializable {
 	
 	private UserModel userModel;
+	private StockModel stockModel;
 	private ObservableList<Customer> customers;
 	
 	@FXML
@@ -49,6 +53,10 @@ public class MainPageController implements Initializable {
 	private ScrollPane scrollPane;
 	@FXML
 	private TabPane tabPane;
+	@FXML
+	private Pane pbPane;
+	@FXML
+	private ProgressBar pb;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -61,8 +69,41 @@ public class MainPageController implements Initializable {
 		userModel = user;
 		this.displayUser();
 	    this.displayCustomers();
-	    this.displayMarkeyTab();
+	    
+	    isConnected.setText("Retrieving live market data...");
+	    
+	    pb.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
+	    
+	    this.startTask();
 	}
+	
+	public void startTask() {
+		Runnable task = new Runnable() {
+			public void run() {
+				runTask();
+			}
+		};
+		// Run the task in a background thread
+		Thread backgroundThread = new Thread(task);
+		// Terminate the running thread if the application exits
+		backgroundThread.setDaemon(true);
+		// Start the thread
+		backgroundThread.start();
+	}
+
+	public void runTask() {
+		try {
+		    stockModel = new StockModel();
+		    stockModel.startUpdate();
+		    Platform.runLater(() -> {
+		    	isConnected.setText("Market data up to date!");
+				this.displayMarkeyTab();
+				pbPane.getChildren().remove(pb);
+		    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}      
 	
 	private void displayUser() {
 		userLabel.setText("Welcome " + userModel.getFirstName() + " " + userModel.getLastName() + "!");
@@ -141,6 +182,8 @@ public class MainPageController implements Initializable {
 	private void displayMarkeyTab() {
 		FXMLLoader loader = new FXMLLoader(
 			    getClass().getResource("/FXML/MarketTab.fxml"));
+		MarketTabController controller = new MarketTabController();
+		loader.setController(controller);
 		
 		try {
 			Tab market = new Tab("Market");
@@ -149,6 +192,7 @@ public class MainPageController implements Initializable {
 			
 			tabPane.getTabs().add(market);
 			tabPane.getSelectionModel().select(market);
+			controller.initializer(stockModel);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

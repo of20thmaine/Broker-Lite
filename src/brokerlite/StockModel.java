@@ -194,4 +194,8 @@ public class StockModel {
 			}
 		}
 	}
+	
+	public List<Stock> getStocks() {
+		return stockList;
+	}
 }
