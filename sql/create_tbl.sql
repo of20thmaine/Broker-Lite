@@ -1,5 +1,8 @@
 DROP TRIGGER IF EXISTS old_stocks;
 DROP VIEW IF EXISTS broker_credentials;
+DROP VIEw IF EXISTS all_user_id;
+DROP VIEW IF EXISTS popular_stock;
+DROP VIEW IF EXISTS num_stock_owners;
 DROP TABLE IF EXISTS stock_owned;
 DROP TABLE IF EXISTS relationship;
 DROP TABLE IF EXISTS broker;
@@ -57,6 +60,12 @@ CREATE TABLE stock_owned (
     FOREIGN KEY (client_id) REFERENCES client(id) on DELETE CASCADE,
     FOREIGN KEY (stock_name) REFERENCES stock(name) ON DELETE CASCADE
 );
+
+
+CREATE VIEW all_user_id AS
+select b.id from (broker as b)
+union all
+select c.id from (client as c);
 
 CREATE VIEW broker_credentials as
 select broker.id,username,password
