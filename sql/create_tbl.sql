@@ -62,6 +62,18 @@ CREATE VIEW broker_credentials as
 select broker.id,username,password
 from broker natural join credentials;
 
+CREATE VIEW num_stock_owners as
+select s.stock_name,count(*) as total
+from stock_owned as s
+group by(s.stock_name);
+
+CREATE VIEW popular_stock as
+select stock_name, max(total)
+from (
+	select s.stock_name,count(*) as total
+	from stock_owned as s
+	group by(s.stock_name));
+
 CREATE TRIGGER delete_old_stocks
 AFTER INSERT ON stock
 FOR EACH ROW
