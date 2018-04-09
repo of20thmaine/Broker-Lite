@@ -62,11 +62,13 @@ CREATE VIEW broker_credentials as
 select broker.id,username,password
 from broker natural join credentials;
 
-CREATE TRIGGER old_stocks AFTER INSERT ON stock
-begin
+CREATE TRIGGER delete_old_stocks
+AFTER INSERT ON stock
+FOR EACH ROW
+BEGIN
 	DELETE 
-	FROM (select name,date_time
-		from stock
-		where(julianday('now')-julianday(date_time)) > 30)
-end;
-
+	FROM stock
+	where date_time in (select s.date_time
+		from (stock as s)
+		where(julianday('now')-julianday(s.date_time)) > 30);
+END;

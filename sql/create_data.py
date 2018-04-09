@@ -94,7 +94,7 @@ for creds in range(len(username)):
 Populates stock table
 """
 for s in range(len(stockName)):
-    file.write("INSERT INTO stock VALUES (\""+stockName[s]+"\",2018-03-19,"+str(percentChange[s])+","+str(openingPrice[s])+","+str(closingPrice[s])+","+str(0)+");\n")
+    file.write("INSERT INTO stock VALUES (\""+stockName[s]+"\",date('now'),"+str(percentChange[s])+","+str(openingPrice[s])+","+str(closingPrice[s])+");\n")
 
 """
 Populates relationship table
