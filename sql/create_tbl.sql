@@ -1,3 +1,4 @@
+DROP TRIGGER IF EXISTS old_stocks;
 DROP VIEW IF EXISTS broker_credentials;
 DROP TABLE IF EXISTS stock_owned;
 DROP TABLE IF EXISTS relationship;
@@ -39,25 +40,33 @@ CREATE TABLE broker (
 	phone_num TEXT,
     email TEXT,
 	address TEXT,
-	FOREIGN KEY (id) references credentials(id)
+	FOREIGN KEY (id) references credentials(id) ON DELETE CASCADE
 );
 
 CREATE TABLE relationship (
     broker_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
-    FOREIGN KEY (broker_id) REFERENCES broker(id),
-    FOREIGN KEY (client_id) REFERENCES client(id)
+    FOREIGN KEY (broker_id) REFERENCES broker(id) ON DELETE CASCADE,
+    FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE
 );
 
 CREATE TABLE stock_owned (
     client_id INTEGER NOT NULL,
     stock_name TEXT NOT NULL,
     shares INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES client(id),
-    FOREIGN KEY (stock_name) REFERENCES stock(name)
+    FOREIGN KEY (client_id) REFERENCES client(id) on DELETE CASCADE,
+    FOREIGN KEY (stock_name) REFERENCES stock(name) ON DELETE CASCADE
 );
 
 CREATE VIEW broker_credentials as
 select broker.id,username,password
 from broker natural join credentials;
+
+CREATE TRIGGER old_stocks AFTER INSERT ON stock
+begin
+	DELETE 
+	FROM (select name,date_time
+		from stock
+		where(julianday('now')-julianday(date_time)) > 30)
+end;
 
