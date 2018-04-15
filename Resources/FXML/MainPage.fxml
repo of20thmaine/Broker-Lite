@@ -94,7 +94,7 @@
                   </Label>
                   <Pane fx:id="pbPane" prefHeight="26.0" prefWidth="229.0">
                      <children>
-                        <ProgressBar fx:id="pb" layoutY="4.0" prefHeight="18.0" prefWidth="109.0" progress="0.0" />
+                        <ProgressBar fx:id="pb" layoutX="37.0" layoutY="7.0" prefHeight="13.0" prefWidth="126.0" progress="0.0" />
                      </children>
                   </Pane>
                </children>

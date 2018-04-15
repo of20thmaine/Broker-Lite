@@ -3,18 +3,20 @@ package brokerlite;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
@@ -24,6 +26,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -68,10 +71,8 @@ public class MainPageController implements Initializable {
 	public void postInitialize(UserModel user) {
 		userModel = user;
 		this.displayUser();
-	    this.displayCustomers();
 	    
 	    isConnected.setText("Retrieving live market data...");
-	    
 	    pb.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
 	    
 	    this.startTask();
@@ -97,8 +98,10 @@ public class MainPageController implements Initializable {
 		    stockModel.startUpdate();
 		    Platform.runLater(() -> {
 		    	isConnected.setText("Market data up to date!");
+		    	this.displayCustomers();
 				this.displayMarkeyTab();
 				pbPane.getChildren().remove(pb);
+				this.testStocks();
 		    });
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,19 +116,54 @@ public class MainPageController implements Initializable {
 		customers = FXCollections.observableArrayList(userModel.getCustomers());
 		
 		sideMenu.getChildren().clear();
-		sideMenu.setSpacing(5.0);
+		sideMenu.setSpacing(7.0);
 		
 		for(Customer c : customers) {
-			Button b = new Button();
-			b.setId("customer-button");
-			b.setText(c.getName() + "\n" + c.getCash());
-			b.setMaxWidth(Double.MAX_VALUE);
-			
-			b.setOnAction( e -> {
-				this.generateCustomerTab(c);
-			});
-			
-			sideMenu.getChildren().add(b);
+			try {
+				stockModel.getCustomerStocks(c);
+				
+				HBox customerButton = new HBox();
+				VBox labelStack = new VBox(0.25);
+				customerButton.setId("customer-button");
+				
+				Label performance;
+				Label cName = new Label(c.getName());
+				cName.setId("cname-label");
+				
+				DecimalFormat formatter = new DecimalFormat("#,###.00");
+				
+				if (c.getTodayPerformance() >= 0) {
+					performance = new Label("↑ " + formatter.format(c.getTodayPerformance()));
+					performance.setId("positive-cash-label");
+				} else {
+					performance = new Label("↓ " + formatter.format((-1)*c.getTodayPerformance()));
+					performance.setId("negative-cash-label");
+				}
+				
+				customerButton.setAlignment(Pos.CENTER);
+				labelStack.setMaxWidth(Double.MAX_VALUE);
+				labelStack.setAlignment(Pos.CENTER);
+				
+				labelStack.getChildren().add(cName);
+				labelStack.getChildren().add(performance);
+
+				customerButton.getChildren().add(labelStack);
+				
+				customerButton.setMaxWidth(Double.MAX_VALUE);
+				
+				EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+					   @Override 
+					   public void handle(MouseEvent e) { 
+						   generateCustomerTab(c);  
+					   } 
+					};
+				customerButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+				
+				sideMenu.getChildren().add(customerButton);
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -192,7 +230,7 @@ public class MainPageController implements Initializable {
 			
 			tabPane.getTabs().add(market);
 			tabPane.getSelectionModel().select(market);
-			controller.initializer(stockModel);
+			controller.initializer(customers);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -236,6 +274,23 @@ public class MainPageController implements Initializable {
 		} catch (SQLException e) {
 			return false;
 		}
+	}
+	
+	private void testStocks() {
+		for (Customer c : customers) {
+			try {
+				stockModel.getCustomerStocks(c);
+				double[] portfolio = c.getPortfolioHistory();
+				System.out.print(c.getName() + ":\t");
+				for (double d : portfolio) {
+					System.out.print("$" + String.format("%.2f", d) + "\t");
+				}
+				System.out.print("\n");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 	

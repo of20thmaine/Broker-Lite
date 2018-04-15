@@ -16,6 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Controller provides implementation for the login-screen.
+ * Inherits from JavaFX Initializable class.
+ */
 public class NewLoginController implements Initializable {
 	
 	private UserModel userModel = new UserModel();
@@ -33,6 +38,13 @@ public class NewLoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {/* Inherited. */}
 	
+	/**
+	 * Event handler for when user clicks login-button.
+	 * Retrieves data from textfields and passes to UserModel, which then
+	 * authenticates the user with the database. If user authenticated,
+	 * method generates the Main-Page.
+	 * @param event
+	 */
 	public void login(ActionEvent event) {
 		try {
 			if(userModel.authenticateUser(userName.getText(), userPassword.getText())) {
@@ -70,6 +82,12 @@ public class NewLoginController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Event handler for when user clicks the Register button.
+	 * Replaces the left pane of login screen with the registration page.
+	 * @param event
+	 * @throws IOException
+	 */
 	public void registerUser(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 			    getClass().getResource("/FXML/RegisterBroker.fxml"));

@@ -21,13 +21,26 @@ public class Stock {
 	 */
 	public void getDetails() {
 		System.out.println(this.symbol);
-		for(StockQuote sq: stock_quotes) {
+		for (StockQuote sq: stock_quotes) {
 			System.out.println(sq+"\n");
 		}
 	}
 	
 	public void newStockQuote(String date, double indexVal, double high, double low) {
 		stock_quotes.add(new StockQuote(date,indexVal,high,low));
+	}
+	
+	public double[] getTenDayHistory() {
+		double[] history = new double[10];
+		
+		int counter = 0;
+		
+		for (int i = stock_quotes.size() - 1; counter < 10 && i > -1; i--) {
+			history[counter] = stock_quotes.get(i).getIndexPrice();
+			counter++;
+		}
+		
+		return history;
 	}
 	
 	@Override

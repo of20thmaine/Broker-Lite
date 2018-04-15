@@ -17,14 +17,14 @@ import java.util.List;
 
 public class StockModel {
 
-//	String [] symbols = {"XQC", "XNDXT25NNR", "XNDXT25NNER", "XNDXT25E", "XNDXT25", "XNDXS2NNR", "XNDXS2", "XNDXS1NNR", "XNDXS1", "XNDXNNRS3", "XNDXNNRGBP", "XNDXNNRHKD", "XNDXNNREUR", "XNDXNNRCHF", "XNDXNNRCAD", "XNDXL3TR", "XNDXL", "XNDXHKD", "XNDXGBPMH", "XNDXGBP", "XNDXEURMH", "XNDXCHFMH", "XNDXEUR", "XNDXCHF", "XNDXCAD", "XNBINNR", "XCMPNNR"};
+//	String [] symbols = {"XQC", "XNDXT25NNR", "XNDXT25NNER", "XNDXT25E", "XNDXT25", "XNDXS2NNR", "XNDXS2", "XNDXS1NNR",
+//	"XNDXS1", "XNDXNNRS3", "XNDXNNRGBP", "XNDXNNRHKD", "XNDXNNREUR", "XNDXNNRCHF", "XNDXNNRCAD", "XNDXL3TR", "XNDXL", "XNDXHKD",
+//	"XNDXGBPMH", "XNDXGBP", "XNDXEURMH", "XNDXCHFMH", "XNDXEUR", "XNDXCHF", "XNDXCAD", "XNBINNR", "XCMPNNR"};
 	private Connection connection;
 	public static List<Stock> stockList = new ArrayList<Stock>();
-//	private List<String> stock_symbol = new ArrayList<String>();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private String api_key = "kGiW9-TEk_VB6Lexs68_";
 	private String quandlDB = "NASDAQOMX";
-//	public static List<Stock> stockList = new ArrayList<Stock>();
 
 	public StockModel() {
 		connection = SqlConnect.connector();
@@ -56,14 +56,14 @@ public class StockModel {
 			System.out.println("Unable to execute update.");
 		}
 		
-		for (Stock stock : stockList) {
-			stock.getDetails();
-		}
+//		for (Stock stock : stockList) {
+//			stock.getDetails();
+//		}
 		
 	}
 
 	private void getAPI() throws Exception {
-		Long daysInMillis = (long) 259200000.0; // 3 days in milliseconds
+		Long daysInMillis = (long) 259200000.0 * 6; // 3 days in milliseconds
 		Timestamp priorDays = new Timestamp(System.currentTimeMillis() - daysInMillis);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		String start_date = formatter.format(priorDays);
@@ -104,9 +104,9 @@ public class StockModel {
 			 */
 				for (int i=1; i<chunks.size(); i++) {
 					if (this.updateDatabase(stock.getSymbol(), chunks.get(i)[0], Double.valueOf(chunks.get(i)[1]), Double.valueOf(chunks.get(i)[2]), Double.valueOf(chunks.get(i)[3]))) {
-						System.out.println("Added to "+stock.getSymbol()+" successfully for "+chunks.get(i)[0]);
+//						System.out.println("Added to "+stock.getSymbol()+" successfully for "+chunks.get(i)[0]);
 					} else {
-						System.out.println("Could not add "+stock.getSymbol()+" to database.");
+//						System.out.println("Could not add "+stock.getSymbol()+" to database.");
 					}
 				}
 			
@@ -192,6 +192,44 @@ public class StockModel {
 			} finally {
 				ps.close();
 			}
+		}
+	}
+	
+	public void getCustomerStocks(Customer c) throws SQLException {
+		ArrayList<Stock> customerStocks = new ArrayList<Stock>();
+		ArrayList<Integer> customerShares = new ArrayList<Integer>();
+		
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT stock_name, shares FROM stock_owned WHERE client_id = ?";
+		
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, c.getId());
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String stockName = resultSet.getString(1);
+				int shares = resultSet.getInt(2);
+				
+
+				for (Stock s : stockList) {
+					if (s.getSymbol().equals(stockName)) {
+						customerStocks.add(s);
+						customerShares.add(shares);
+						break;
+					}
+				}
+			}
+			
+			c.setStocks(customerStocks, customerShares);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			preparedStatement.close();
+			resultSet.close();
 		}
 	}
 	

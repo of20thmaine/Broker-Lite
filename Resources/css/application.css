@@ -1,3 +1,9 @@
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Application default CSS
+ */
+
+
 .root {
 	-fx-accent: transparent;
 	-fx-focus-color: transparent;
@@ -35,14 +41,37 @@
 }
 
 #log-out:hover {
-	-fx-background-color: #c63d3d;
-	-fx-border-color: #403e40;
-	-fx-border-width: 1 5 1 5;
+	-fx-border-color: #ef2121;
+	-fx-text-fill: #ef2121;
 }
 
 #side-menu {
-	-fx-padding: 30 10 5 5;
+	-fx-padding: 20 5 5 5;
 	-fx-background-color: #5c5656;
+}
+
+#positive-cash-label {
+	-fx-font-family: "Futura";
+    -fx-font-size: 20 px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #0ad625;
+    -fx-text-alignment: center;
+}
+
+#negative-cash-label {
+	-fx-font-family: "Futura";
+    -fx-font-size: 20 px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #ef2121;
+    -fx-text-alignment: center;
+}
+
+#cname-label {
+	-fx-font-family: "Futura";
+    -fx-font-size: 18 px;
+    -fx-font-weight: 300;
+    -fx-text-fill: #FFFFFF;
+    -fx-text-alignment: center;
 }
 
 #customer-button {
@@ -51,16 +80,12 @@
 	-fx-border-color: #FFFFFF;
 	-fx-background-radius: 11;
 	-fx-border-radius:11;
-	-fx-font-family: "Futura";
-    -fx-font-size: 16 px;
-    -fx-font-weight: 300;
-    -fx-text-fill: #FFFFFF;
-    -fx-text-alignment: center;
+	-fx-text-alignment: center;
+	-fx-padding: 5 0 5 0;
 }
 
 #customer-button:hover {
-	-fx-background-color: #FFFFFF;
-	-fx-text-fill: black;
+	-fx-background-color: #5c5656;
 }
 
 
