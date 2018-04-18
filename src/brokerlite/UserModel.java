@@ -246,6 +246,21 @@ public class UserModel {
 		}
 	}
 	
+	public boolean deleteClient(int client_id) {
+		PreparedStatement ps = null;
+		String query = "DELETE FROM client WHERE id = ?";
+		
+		try {
+			ps = connection.prepareStatement(query);
+			ps.setInt(1, client_id);
+			return ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	private int generateCustomerKey() {
 		return ThreadLocalRandom.current().nextInt(10000, 100000);
 	}
