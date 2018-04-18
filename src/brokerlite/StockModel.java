@@ -246,20 +246,35 @@ public class StockModel {
         PreparedStatement ps_client = null;
         PreparedStatement ps_stock_owned = null;
         
+        boolean existing = this.stock_exist(client_id,stock_name);
+        
+        System.out.println("Existing: "+existing);
+        
         String query_client = "UPDATE client SET cash = (cash + ?)";
         String query_stock_owned = "UPDATE stock_owned SET shares = (shares + ?) WHERE stock_name = ? AND client_id = ?";
+        if (!existing) {
+        	query_stock_owned = "INSERT INTO stock_owned VALUES (?,?,?)";
+        }
         
         try {
             connection.setAutoCommit(false);
+            
+            
             
             ps_client = connection.prepareStatement(query_client);
             ps_stock_owned = connection.prepareStatement(query_stock_owned);
             
             ps_client.setDouble(1, amount);
             
-            ps_stock_owned.setInt(1, shares);
-            ps_stock_owned.setString(2, stock_name);
-            ps_stock_owned.setInt(3, client_id);
+            if (existing) {
+	            ps_stock_owned.setInt(1, shares);
+	            ps_stock_owned.setString(2, stock_name);
+	            ps_stock_owned.setInt(3, client_id);
+            } else {
+            	ps_stock_owned.setInt(1, client_id);
+            	ps_stock_owned.setString(2, stock_name);
+            	ps_stock_owned.setInt(3, shares);
+            }
             
             ps_client.executeUpdate();
             ps_stock_owned.executeUpdate();
@@ -276,6 +291,24 @@ public class StockModel {
             }
         }
         
+    }
+    
+    private boolean stock_exist(int client_id, String stock_name) {
+    	
+    	PreparedStatement ps = null;
+    	String query = "UPDATE stock_owned SET shares = (shares + 0) WHERE client_id = ? AND stock_name = ?";
+    	System.out.println("Inside stock_exist");
+    	try {
+    		ps = connection.prepareStatement(query);
+    		ps.setInt(1, client_id);
+    		ps.setString(2, stock_name);
+    		return ps.execute();
+    	} catch (Exception e){
+    		e.printStackTrace();
+    	}
+    	
+    	return false;
+    	
     }
 	
 	public List<Stock> getStocks() {
