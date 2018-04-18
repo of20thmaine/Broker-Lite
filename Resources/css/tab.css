@@ -15,10 +15,91 @@
 	-fx-background-color: #5c5656;
 }
 
+#little-buy {
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-width: 2 2 2 2;
+	-fx-background-color: #49d14d;
+	-fx-font-family: "Futura";
+    -fx-font-size: 16 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 30 5 30;
+}
+
+#little-buy:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #49d14d;
+	-fx-border-color: #49d14d;
+}
+
+#little-sell {
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-width: 2 2 2 2;
+	-fx-background-color: #c63d3d;
+	-fx-font-family: "Futura";
+    -fx-font-size: 16 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 30 5 30;
+}
+
+#little-sell:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #c63d3d;
+	-fx-border-color: #c63d3d;
+}
+
+#buy-assets {
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-width: 2 2 2 2;
+	-fx-background-color: #49d14d;
+	-fx-font-family: "Futura";
+    -fx-font-size: 26 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 30 5 30;
+}
+
+#buy-assets:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #49d14d;
+	-fx-border-color: #49d14d;
+}
+
+#sell-assets {
+	-fx-border-color: #FFFFFF;
+	-fx-border-radius: 12 12 12 12;
+	-fx-background-radius: 12 12 12 12;
+	-fx-border-width: 2 2 2 2;
+	-fx-background-color: #c63d3d;
+	-fx-font-family: "Futura";
+    -fx-font-size: 26 px;
+    -fx-font-weight: 100;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5 30 5 30;
+}
+
+#sell-assets:hover {
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #c63d3d;
+	-fx-border-color: #c63d3d;
+}
+
+#stock-list {
+    -fx-background-color: #5c5656;
+    -fx-border-color: white;
+}
+
 #title {
 	-fx-font-family: "Futura";
     -fx-text-fill: #FFFFFF;
-    -fx-alignment:center;
+    -fx-alignment: center;
     -fx-font-size: 30 px;
     -fx-background-color: #3c3c3c;
 }
@@ -26,12 +107,97 @@
 .label {
 	-fx-font-family: "Futura";
     -fx-text-fill: #FFFFFF;
-    -fx-alignment:center;
+    -fx-alignment: center;
     -fx-font-size: 16 px;
+}
+
+#stock-holder {
+	-fx-background-color: #5c5656;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#stock-holder2 {
+	-fx-background-color: #5c5656;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#stock-holder2:hover {
+	-fx-background-color: #3c3c3c;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#sell-holder {
+	-fx-background-color: #c63d3d;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#sell-holder:hover {
+	-fx-background-color: black;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#buy-holder {
+	-fx-background-color: #49d14d;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#buy-holder:hover {
+	-fx-background-color: black;
+	-fx-border-color: white;
+	-fx-border-width: 1;
+	-fx-alignment: center;
+}
+
+#customer-small-label {
+    -fx-font-size: 18 px;
+    -fx-font-weight: 400;
+}
+
+#stock-label {
+	-fx-font-family: "Futura";
+	-fx-font-size: 18 px;
+    -fx-font-weight: 500;
+}
+
+#white-number {
+	-fx-font-family: 'Varela Round', sans-serif;
+	-fx-text-fill: white;
+	-fx-font-size: 18 px;
+    -fx-font-weight: 400;
+}
+
+#positive-performance {
+	-fx-font-family: 'Varela Round', sans-serif;
+	-fx-text-fill: #0ad625;
+	-fx-font-size: 20 px;
+    -fx-font-weight: 500;
+}
+
+#negative-performance {
+	-fx-font-family: 'Varela Round', sans-serif;
+	-fx-text-fill: #fc3a3a;
+	-fx-font-size: 20 px;
+    -fx-font-weight: 600;
 }
 
 #big-label {
 	-fx-font-size: 42 px;
+}
+
+#medium-label {
+	-fx-font-size: 28 px;
 }
 
 #prompt-label {
@@ -45,6 +211,16 @@
 #register-pane {
 	-fx-background-color: red;
 }
+
+.chart-pie-label-line {
+    -fx-stroke: white;
+    -fx-fill: white;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-size: 1em;
+} 
 
 #log-in {
 	-fx-border-color: #FFFFFF;

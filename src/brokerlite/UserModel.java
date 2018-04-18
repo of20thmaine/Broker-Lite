@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Class communicates between application and database for User-related transactions.
+ */
 public class UserModel {
 	
 	private int userId;

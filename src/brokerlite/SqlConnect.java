@@ -2,8 +2,16 @@ package brokerlite;
 
 import java.sql.*;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Class allows for SQL-Lite database connection via JDBC.
+ */
 public class SqlConnect {
 	
+	/**
+	 * Returns the valid connection interface to database.
+	 * @return
+	 */
 	public static Connection connector() {
 		
 		try {

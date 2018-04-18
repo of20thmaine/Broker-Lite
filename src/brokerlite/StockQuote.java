@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Class stores stock quote data.
+ */
 @XmlRootElement(name="StockQuote")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class StockQuote {

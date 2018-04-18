@@ -33,11 +33,14 @@
 	-fx-border-radius: 12 12 12 12;
 	-fx-padding: 0 0 0 0;
 	-fx-border-width: 1 1 1 1;
-	-fx-background-radius: 0 11 11 0;
 	-fx-background-color: #403e40;
 	-fx-font-family: "Futura";
     -fx-font-size: 14 px;
     -fx-font-weight: 300;
+}
+
+#logout-buffer {
+	-fx-background-color: #403e40;
 }
 
 #log-out:hover {
@@ -51,18 +54,26 @@
 }
 
 #positive-cash-label {
-	-fx-font-family: "Futura";
-    -fx-font-size: 20 px;
-    -fx-font-weight: 500;
+	-fx-font-family: 'Varela Round', sans-serif;
+    -fx-font-size: 18 px;
+    -fx-font-weight: 400;
     -fx-text-fill: #0ad625;
     -fx-text-alignment: center;
 }
 
 #negative-cash-label {
+	-fx-font-family: 'Varela Round', sans-serif;
+    -fx-font-size: 18 px;
+    -fx-font-weight: 500;
+    -fx-text-fill: #fc3a3a;
+    -fx-text-alignment: center;
+}
+
+#register-button-label {
 	-fx-font-family: "Futura";
     -fx-font-size: 20 px;
-    -fx-font-weight: 500;
-    -fx-text-fill: #ef2121;
+    -fx-font-weight: 400;
+    -fx-text-fill: #FFFFFF;
     -fx-text-alignment: center;
 }
 
@@ -102,8 +113,6 @@
 .menu-bar {
     -fx-background-color: -fx-my-menu-color;
     -fx-padding: 1 0 0 20;
-    -fx-border-radius: 12 0 0 12;
-  	-fx-background-radius: 12 0 0 12;
 }
 
 /*** Top-level menu itself (not selected / hovered) ***/

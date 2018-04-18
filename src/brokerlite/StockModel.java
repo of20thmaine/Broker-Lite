@@ -10,16 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Everything works. May not need stock class since can make queries for the data. Uncomment code in main.java to activate this class in the correct order.
- * @author panns
- *
+ * @author Bobby Palmer, Samnang Pann
+ * Class communicates between application and database for Stock related transactions.
+ * Class also implements live API connection for current market data.
  */
-
 public class StockModel {
 
 //	String [] symbols = {"XQC", "XNDXT25NNR", "XNDXT25NNER", "XNDXT25E", "XNDXT25", "XNDXS2NNR", "XNDXS2", "XNDXS1NNR",
-//	"XNDXS1", "XNDXNNRS3", "XNDXNNRGBP", "XNDXNNRHKD", "XNDXNNREUR", "XNDXNNRCHF", "XNDXNNRCAD", "XNDXL3TR", "XNDXL", "XNDXHKD",
-//	"XNDXGBPMH", "XNDXGBP", "XNDXEURMH", "XNDXCHFMH", "XNDXEUR", "XNDXCHF", "XNDXCAD", "XNBINNR", "XCMPNNR"};
+//		"XNDXS1", "XNDXNNRS3", "XNDXNNRGBP", "XNDXNNRHKD", "XNDXNNREUR", "XNDXNNRCHF", "XNDXNNRCAD", "XNDXL3TR", "XNDXL", "XNDXHKD",
+//		"XNDXGBPMH", "XNDXGBP", "XNDXEURMH", "XNDXCHFMH", "XNDXEUR", "XNDXCHF", "XNDXCAD", "XNBINNR", "XCMPNNR"};
 	private Connection connection;
 	public static List<Stock> stockList = new ArrayList<Stock>();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -63,7 +62,7 @@ public class StockModel {
 	}
 
 	private void getAPI() throws Exception {
-		Long daysInMillis = (long) 259200000.0 * 6; // 3 days in milliseconds
+		Long daysInMillis = (long) 259200000.0 * 5; // 3 days in milliseconds
 		Timestamp priorDays = new Timestamp(System.currentTimeMillis() - daysInMillis);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		String start_date = formatter.format(priorDays);
@@ -213,12 +212,13 @@ public class StockModel {
 				String stockName = resultSet.getString(1);
 				int shares = resultSet.getInt(2);
 				
-
-				for (Stock s : stockList) {
-					if (s.getSymbol().equals(stockName)) {
-						customerStocks.add(s);
-						customerShares.add(shares);
-						break;
+				if (shares != 0) {
+					for (Stock s : stockList) {
+						if (s.getSymbol().equals(stockName)) {
+							customerStocks.add(s);
+							customerShares.add(shares);
+							break;
+						}
 					}
 				}
 			}
@@ -232,6 +232,51 @@ public class StockModel {
 			resultSet.close();
 		}
 	}
+	
+
+    /**
+     * This assumes that you have already checked if the client has enough money to make the transaction and the cost and know the client's ID.
+     * @param cost
+     * @param shares
+     * @param stock_name
+     * @param client_id
+     */
+    public void transaction(double amount, int shares, String stock_name, int client_id) {
+        
+        PreparedStatement ps_client = null;
+        PreparedStatement ps_stock_owned = null;
+        
+        String query_client = "UPDATE client SET cash = (cash + ?)";
+        String query_stock_owned = "UPDATE stock_owned SET shares = (shares + ?) WHERE stock_name = ? AND client_id = ?";
+        
+        try {
+            connection.setAutoCommit(false);
+            
+            ps_client = connection.prepareStatement(query_client);
+            ps_stock_owned = connection.prepareStatement(query_stock_owned);
+            
+            ps_client.setDouble(1, amount);
+            
+            ps_stock_owned.setInt(1, shares);
+            ps_stock_owned.setString(2, stock_name);
+            ps_stock_owned.setInt(3, client_id);
+            
+            ps_client.executeUpdate();
+            ps_stock_owned.executeUpdate();
+            connection.commit();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        
+    }
 	
 	public List<Stock> getStocks() {
 		return stockList;

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +19,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
@@ -33,12 +37,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Class implements underlying logic of main-page UI.
+ */
 public class MainPageController implements Initializable {
 	
 	private UserModel userModel;
 	private StockModel stockModel;
 	private ObservableList<Customer> customers;
+	private ObservableList<Stock> stocks;
+	ObservableList<Stock> stocksOwned;
+	private ArrayList<String> openTabs = new ArrayList<String>();
 	
 	@FXML
 	private Label isConnected;
@@ -72,7 +84,7 @@ public class MainPageController implements Initializable {
 		userModel = user;
 		this.displayUser();
 	    
-	    isConnected.setText("Retrieving live market data...");
+	    isConnected.setText("Retrieving live market data.");
 	    pb.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
 	    
 	    this.startTask();
@@ -97,11 +109,11 @@ public class MainPageController implements Initializable {
 		    stockModel = new StockModel();
 		    stockModel.startUpdate();
 		    Platform.runLater(() -> {
-		    	isConnected.setText("Market data up to date!");
+		    	isConnected.setText("Market data up to date.");
 		    	this.displayCustomers();
+		    	this.bestWorstPerformers();
 				this.displayMarkeyTab();
-				pbPane.getChildren().remove(pb);
-				this.testStocks();
+				pb.setVisible(false);
 		    });
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,10 +145,10 @@ public class MainPageController implements Initializable {
 				DecimalFormat formatter = new DecimalFormat("#,###.00");
 				
 				if (c.getTodayPerformance() >= 0) {
-					performance = new Label("↑ " + formatter.format(c.getTodayPerformance()));
+					performance = new Label("↑  " + formatter.format(c.getTodayPerformance()));
 					performance.setId("positive-cash-label");
 				} else {
-					performance = new Label("↓ " + formatter.format((-1)*c.getTodayPerformance()));
+					performance = new Label("↓  " + formatter.format((-1)*c.getTodayPerformance()));
 					performance.setId("negative-cash-label");
 				}
 				
@@ -165,9 +177,18 @@ public class MainPageController implements Initializable {
 				e1.printStackTrace();
 			}
 		}
+		
+		this.registerCustomerButton();
 	}
 	
 	private void generateCustomerTab(Customer c) {
+		for (String t : openTabs) {
+			if (t.equals(c.getId()+"")) {
+				isConnected.setText("Tab Open.");
+				return;
+			}
+		}
+		
 		try {
 			FXMLLoader loader = new FXMLLoader(
 				    getClass().getResource("/FXML/CustomerTab.fxml"));
@@ -188,7 +209,16 @@ public class MainPageController implements Initializable {
 			tabPane.getTabs().add(customerTab);
 			tabPane.getSelectionModel().select(customerTab);
 			
-			controller.initializer(c);
+			controller.initializer(c, stocks, stockModel, this);
+			openTabs.add(c.getId()+"");
+			
+			customerTab.setOnClosed(event -> {
+				for (int i = 0; i < openTabs.size(); i++) {
+					if (openTabs.get(i).equals(c.getId()+"")) {
+						openTabs.remove(i);
+					}
+				}
+			});
 		} catch (IOException e) {
 			System.out.println("Duplicate tab handled.");
 		}
@@ -218,6 +248,13 @@ public class MainPageController implements Initializable {
 	
 	@FXML
 	private void displayMarkeyTab() {
+		for (String t : openTabs) {
+			if (t.equals("market")) {
+				isConnected.setText("Tab Open.");
+				return;
+			}
+		}
+		
 		FXMLLoader loader = new FXMLLoader(
 			    getClass().getResource("/FXML/MarketTab.fxml"));
 		MarketTabController controller = new MarketTabController();
@@ -230,7 +267,15 @@ public class MainPageController implements Initializable {
 			
 			tabPane.getTabs().add(market);
 			tabPane.getSelectionModel().select(market);
-			controller.initializer(customers);
+			controller.initializer(customers, stocksOwned);
+			openTabs.add("market");
+			market.setOnClosed(event -> {
+				for (int i = 0; i < openTabs.size(); i++) {
+					if (openTabs.get(i).equals("market")) {
+						openTabs.remove(i);
+					}
+				}
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -238,6 +283,13 @@ public class MainPageController implements Initializable {
 	
 	@FXML
 	private void displayCustomerRegistration() {
+		for (String t : openTabs) {
+			if (t.equals("register")) {
+				isConnected.setText("Tab Open.");
+				return;
+			}
+		}
+		
 		FXMLLoader loader = new FXMLLoader(
 			    getClass().getResource("/FXML/CustomerRegistration.fxml"));
 		
@@ -253,6 +305,14 @@ public class MainPageController implements Initializable {
 			
 			tabPane.getTabs().add(customerRegister);
 			tabPane.getSelectionModel().select(customerRegister);
+			openTabs.add("register");
+			customerRegister.setOnClosed(event -> {
+				for (int i = 0; i < openTabs.size(); i++) {
+					if (openTabs.get(i).equals("register")) {
+						openTabs.remove(i);
+					}
+				}
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -276,22 +336,138 @@ public class MainPageController implements Initializable {
 		}
 	}
 	
-	private void testStocks() {
-		for (Customer c : customers) {
-			try {
-				stockModel.getCustomerStocks(c);
-				double[] portfolio = c.getPortfolioHistory();
-				System.out.print(c.getName() + ":\t");
-				for (double d : portfolio) {
-					System.out.print("$" + String.format("%.2f", d) + "\t");
-				}
-				System.out.print("\n");
-			} catch (SQLException e) {
-				e.printStackTrace();
+	private void bestWorstPerformers() {
+		stocks = FXCollections.observableArrayList(stockModel.getStocks());
+		
+		FXCollections.sort(customers, new Comparator<Customer>() {
+			@Override
+			public int compare(Customer o1, Customer o2) {
+				return (int) (o1.getTodayPerformance() - o2.getTodayPerformance());
+			}
+		});
+		
+		stocksOwned = FXCollections.observableArrayList();
+		
+		for (Stock s : stocks) {
+			if (s.isOwned()) {
+				stocksOwned.add(s);
 			}
 		}
 		
+		FXCollections.sort(stocksOwned, new Comparator<Stock>() {
+			@Override
+			public int compare(Stock o1, Stock o2) {
+				return (int) (o1.getChangeValue() - o2.getChangeValue());
+			}
+		});
+		
 	}
+
+	private void registerCustomerButton() {
+		HBox registerButton = new HBox();
+		VBox labelStack = new VBox(0.25);
+		registerButton.setId("customer-button");
+		
+		Label cName = new Label("Register\nNew Customer");
+		cName.setId("register-button-label");
+		cName.setWrapText(true);
+		
+		
+		registerButton.setAlignment(Pos.CENTER);
+		labelStack.setMaxWidth(Double.MAX_VALUE);
+		labelStack.setAlignment(Pos.CENTER);
+		
+		labelStack.getChildren().add(cName);
+
+		registerButton.getChildren().add(labelStack);
+		
+		registerButton.setMaxWidth(Double.MAX_VALUE);
+		
+		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+			   @Override 
+			   public void handle(MouseEvent e) { 
+				   displayCustomerRegistration();  
+			   } 
+			};
+			registerButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+		
+		sideMenu.getChildren().add(registerButton);
+	}
+	
+	@FXML
+	private void showAboutPage() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("About Broker-Lite");
+		alert.setHeaderText("Broker-Lite v 0.1 (Alpha)");
+		alert.setContentText("This application was created by Bobby Palmer and Samnang Pann for a University-class-project");
+
+		alert.showAndWait();
+	}
+	
+	public void buySellRefresh(Customer c) {
+		pb.setVisible(true);
+		
+		isConnected.setText("Executing transaction.");
+	    pb.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
+	    
+		ArrayList<String> newOpen = new ArrayList<String>(openTabs);
+		openTabs.clear();
+		tabPane.getTabs().clear();
+		
+		this.refreshTask(c, newOpen);
+	}
+	
+	public void refreshTask(Customer c, ArrayList<String> newOpen) {
+		Runnable task = new Runnable() {
+			public void run() {
+				runRefreshTask(c, newOpen);
+			}
+		};
+		// Run the task in a background thread
+		Thread backgroundThread = new Thread(task);
+		// Terminate the running thread if the application exits
+		backgroundThread.setDaemon(true);
+		// Start the thread
+		backgroundThread.start();
+	}
+
+	public void runRefreshTask(Customer c, ArrayList<String> newOpen) {
+		try {
+		    stockModel.startUpdate();
+		    
+		    Platform.runLater(() -> {
+		    	isConnected.setText("Transaction succesful.");
+		    	
+				pb.setVisible(false);
+				this.displayCustomers();
+				
+				for (String t : newOpen) {
+					if (t.equals("market")) {
+						this.displayMarkeyTab();
+					} else if (t.equals("register")) {
+						this.displayCustomerRegistration();
+					} else if (!t.equals(c.getId() + "")) {
+						for (Customer cust : customers) {
+							if (t.equals(cust.getId() +"")) {
+								this.generateCustomerTab(cust);
+							}
+						}
+					}
+				}
+				
+				this.generateCustomerTab(c);
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.initStyle(StageStyle.UTILITY);
+				alert.setTitle("Transaction Succesful");
+				alert.setHeaderText(null);
+				alert.setContentText("Your transaction completed succesfully.");
+
+				alert.showAndWait();
+		    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	} 
 	
 	
 }

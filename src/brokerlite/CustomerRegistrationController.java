@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Class implements the underlying logic of customer registration page.
+ */
 public class CustomerRegistrationController {
 	
 	private MainPageController mainPage;
@@ -34,10 +38,18 @@ public class CustomerRegistrationController {
 	@FXML
 	private ScrollPane scrollPane;
 	
+	/**
+	 * Allows reference to mainpage to be included at intialization.
+	 * @param mainPage
+	 */
 	public void initializer(MainPageController mainPage) {
 		this.mainPage = mainPage;
 	}
 
+	/**
+	 * Clears the user input fields.
+	 * @param event
+	 */
 	@FXML
 	public void clearUser(ActionEvent event) {
 		address.clear();
@@ -48,6 +60,11 @@ public class CustomerRegistrationController {
 		investment.clear();
 	}
 	
+	/**
+	 * Performs user registration, initially checks input fields for validity,
+	 * then attempts to register user via UserModel.
+	 * @param event
+	 */
 	@FXML
 	public void register(ActionEvent event) {
 		try {
