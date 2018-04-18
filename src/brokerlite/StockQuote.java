@@ -17,6 +17,13 @@ public class StockQuote {
     private double low;
     private double indexPrice;
     
+    /**
+     * Constructor gives quote its needed initialization parameters.
+     * @param date
+     * @param indexVal
+     * @param high
+     * @param low
+     */
     public StockQuote(String date, double indexVal, double high, double low) {
     	this.high = high;
     	this.low = low;
@@ -24,18 +31,34 @@ public class StockQuote {
     	this.date = date;
     }
     
+    /**
+     * Returns current price on market.
+     * @return
+     */
     public double getIndexPrice() {
     	return this.indexPrice;
     }
     
+    /**
+     * Returns the days high price.
+     * @return
+     */
     public double getHigh() {
     	return this.high;
     }
     
+    /**
+     * Returns the date of the quote.
+     * @return
+     */
     public String getDate() {
     	return this.date;
     }
  
+    /**
+     * Returns the low of the day.
+     * @return
+     */
     public double getLow() {
         return this.low;
     }

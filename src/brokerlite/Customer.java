@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * @author Bobby Palmer, Samnang Pann
- * Customer class allows storage and retrieval of customer data,a nd getter for customer stocks.
+ * Customer class allows storage and retrieval of customer data, and getter for customer stocks.
  */
 public class Customer {
 	
@@ -27,7 +27,7 @@ public class Customer {
 	 * @param address
 	 * @param cash
 	 */
-	public Customer(int id, String firstName, String lastName, String phoneNumber, String email, String address, double cash) {
+	public Customer(int id, String lastName, String firstName, String phoneNumber, String email, String address, double cash) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

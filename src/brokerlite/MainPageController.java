@@ -443,6 +443,7 @@ public class MainPageController implements Initializable {
 		    	isConnected.setText("Transaction succesful.");
 		    	
 				pb.setVisible(false);
+				this.bestWorstPerformers();
 				this.displayCustomers();
 				
 				for (String t : newOpen) {
