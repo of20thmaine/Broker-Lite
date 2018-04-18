@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -21,6 +23,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ProgressBar;
@@ -455,7 +459,12 @@ public class MainPageController implements Initializable {
 					}
 				}
 				
-				this.generateCustomerTab(c);
+				for (Customer cust : customers) {
+					if (cust.getId() == c.getId()) {
+						this.generateCustomerTab(cust);
+					}
+				}
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.initStyle(StageStyle.UTILITY);
 				alert.setTitle("Transaction Succesful");
@@ -467,7 +476,49 @@ public class MainPageController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-	} 
+	}
 	
+	@FXML
+	private void deleteCustomers() {
+		List<String> choices = new ArrayList<>();
+		for (Customer c : customers) {
+			choices.add(c.getName());
+		}
+
+		ChoiceDialog<String> dialog = new ChoiceDialog<>(customers.get(0).getName(), choices);
+		dialog.setTitle("Delete Customer");
+		dialog.setHeaderText("Select Customer for deletion.");
+		dialog.setContentText("Choose customer:");
+
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Are you sure?");
+			alert.setHeaderText("Are you certain you wish to delete " + result.get());
+			alert.setContentText("You cannot undo this operation.");
+
+			Optional<ButtonType> finalResult = alert.showAndWait();
+			if (finalResult.get() == ButtonType.OK){
+				for (Customer c : customers) {
+					if (c.getName().equals(result.get())) {
+						userModel.deleteClient(c.getId());
+						this.displayCustomers();
+					}
+				}
+			}
+		}
+
+	}
+	
+	@FXML
+	private void showPreferences() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initStyle(StageStyle.UTILITY);
+		alert.setTitle("Preferences");
+		alert.setHeaderText(null);
+		alert.setContentText("So what? Dark theme isn't good enough for you? Well thats all you get.");
+
+		alert.showAndWait();
+	}
 	
 }

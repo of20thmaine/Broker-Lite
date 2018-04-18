@@ -37,13 +37,13 @@
                       <Menu mnemonicParsing="false" text="Customer">
                         <items>
                           <MenuItem mnemonicParsing="false" onAction="#displayCustomerRegistration" text="Register Customer" />
-                              <MenuItem mnemonicParsing="false" text="Remove Customer" />
+                              <MenuItem mnemonicParsing="false" onAction="#deleteCustomers" text="Remove Customer" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="Options">
                           <items>
                               <MenuItem mnemonicParsing="false" onAction="#displayMarkeyTab" text="Display Market Tab" />
-                              <MenuItem mnemonicParsing="false" text="Preferences" />
+                              <MenuItem mnemonicParsing="false" onAction="#showPreferences" text="Preferences" />
                           </items>
                         </Menu>
                       <Menu mnemonicParsing="false" text="Help">

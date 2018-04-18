@@ -461,10 +461,14 @@ public class CustomerTabController {
 			} else if (givenShares < 1) {
 				statusLabel.setText("Too few shares entered.");
 			} else {
-				stockModel.transaction((s.todaysValue() * givenShares), (-1) * givenShares, s.getSymbol(),
-						customer.getId());
-				statusLabel.setText("Transaction completed.");
-				mainPage.buySellRefresh(customer);
+				try {
+					stockModel.transaction((s.todaysValue() * givenShares), (-1) * givenShares, s.getSymbol(),
+							customer.getId());
+					statusLabel.setText("Transaction completed.");
+					mainPage.buySellRefresh(customer);
+				} catch (Exception e) {
+					statusLabel.setText("Transaction failed.");
+				}
 			}
 		} catch (Exception e) {
 			statusLabel.setText("Invalid input.");
@@ -507,10 +511,16 @@ public class CustomerTabController {
 			} else if (givenShares < 1) {
 				statusLabel.setText("Too few shares entered.");
 			} else {
-				stockModel.transaction((-1) * (s.todaysValue() * givenShares), givenShares, s.getSymbol(),
-						customer.getId());
-				statusLabel.setText("Transaction completed.");
-				mainPage.buySellRefresh(customer);
+				try {
+					stockModel.transaction((-1) * (s.todaysValue() * givenShares), givenShares, s.getSymbol(),
+							customer.getId());
+					statusLabel.setText("Transaction completed.");
+					mainPage.buySellRefresh(customer);
+					
+				} catch (Exception e) {
+					statusLabel.setText("Transaction failed.");
+				}
+
 			}
 		} catch (Exception e) {
 			statusLabel.setText("Invalid input.");

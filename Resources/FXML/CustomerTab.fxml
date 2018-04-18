@@ -54,12 +54,12 @@
                                     <Insets />
                                  </VBox.margin>
                               </Pane>
-                              <Pane fx:id="buySellArea" minHeight="-Infinity" prefHeight="50.0" prefWidth="774.0" VBox.vgrow="NEVER">
+                              <Pane fx:id="buySellArea" minHeight="-Infinity" prefHeight="71.0" prefWidth="774.0" VBox.vgrow="NEVER">
                                  <children>
                                     <Label fx:id="buySellLabel" layoutX="106.0" layoutY="13.0" prefHeight="25.0" prefWidth="176.0" text="Buy/Sell" />
-                                    <Button fx:id="buySellButton" layoutX="481.0" layoutY="6.0" mnemonicParsing="false" text="Shares" />
-                                    <TextField fx:id="sharesField" layoutX="296.0" layoutY="13.0" prefHeight="25.0" prefWidth="153.0" />
-                                    <Label fx:id="statusLabel" layoutX="546.0" layoutY="6.0" prefHeight="39.0" prefWidth="214.0" />
+                                    <Button fx:id="buySellButton" layoutX="481.0" layoutY="7.0" mnemonicParsing="false" text="Shares" />
+                                    <TextField fx:id="sharesField" layoutX="296.0" layoutY="13.0" prefHeight="25.0" prefWidth="153.0" promptText="Enter Shares" />
+                                    <Label fx:id="statusLabel" layoutX="106.0" layoutY="45.0" prefHeight="25.0" prefWidth="542.0" />
                                  </children>
                               </Pane>
                               <GridPane fx:id="sellStocks">
@@ -78,7 +78,7 @@
                                     <Insets bottom="20.0" />
                                  </VBox.margin>
                               </LineChart>
-                              <PieChart fx:id="pieChart" minHeight="-Infinity" prefHeight="300.0" prefWidth="798.0" title="Portfolio Breakdown">
+                              <PieChart fx:id="pieChart" minHeight="-Infinity" prefHeight="400.0" prefWidth="798.0" title="Portfolio Breakdown">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
