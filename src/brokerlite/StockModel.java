@@ -296,7 +296,7 @@ public class StockModel {
     private boolean stock_exist(int client_id, String stock_name) {
     	
     	PreparedStatement ps = null;
-    	String query = "UPDATE stock_owned SET shares = (shares + 0) WHERE client_id = ? AND stock_name = ?";
+    	String query = "SELECT client_id FROM stock_owned WHERE client_id = ? AND stock_name = ?";
     	System.out.println("Inside stock_exist");
     	try {
     		ps = connection.prepareStatement(query);
