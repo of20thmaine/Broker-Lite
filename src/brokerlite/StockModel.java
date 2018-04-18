@@ -302,7 +302,14 @@ public class StockModel {
     		ps = connection.prepareStatement(query);
     		ps.setInt(1, client_id);
     		ps.setString(2, stock_name);
-    		return ps.execute();
+    		ResultSet rs = ps.executeQuery();
+    		while (rs.next()) {
+    			try {
+    				System.out.println(rs.getInt(client_id));
+    			} catch (Exception e) {
+    				return true;
+    			}
+    		}
     	} catch (Exception e){
     		e.printStackTrace();
     	}
