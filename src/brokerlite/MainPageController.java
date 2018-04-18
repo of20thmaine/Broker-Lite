@@ -501,8 +501,12 @@ public class MainPageController implements Initializable {
 			if (finalResult.get() == ButtonType.OK){
 				for (Customer c : customers) {
 					if (c.getName().equals(result.get())) {
-						userModel.deleteClient(c.getId());
-						this.displayCustomers();
+						try {
+							userModel.deleteClient(c.getId());
+							this.displayCustomers();
+						} catch (Exception e) {
+							isConnected.setText("Connection error, delete failed.");
+						}
 					}
 				}
 			}

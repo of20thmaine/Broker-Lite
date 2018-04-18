@@ -26,6 +26,10 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Verifies connection status of database.
+	 * @return
+	 */
 	public boolean isDbConnected() {
 		try {
 			return !connection.isClosed();
@@ -35,6 +39,13 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Allows new users to be added to database.
+	 * @param user
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createUser(String user, String password) throws SQLException {
 		PreparedStatement ps = null;
 		String query = "INSERT INTO credentials (username, password) VALUES (?,?)";
@@ -53,6 +64,16 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Completes new user registration process.
+	 * @param lname
+	 * @param fname
+	 * @param phoneNum
+	 * @param email
+	 * @param address
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean completeRegistration(String lname, String fname, String phoneNum, String email, String address) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT INTO broker (id, last_name, first_name, phone_num, email, address) VALUES (?,?,?,?,?,?)";
@@ -76,6 +97,13 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Authenticates users with database.
+	 * @param user
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean authenticateUser(String user, String password) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -104,6 +132,10 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Gets all the User's Customers.
+	 * @throws SQLException
+	 */
 	public void populateCustomers() throws SQLException {
 		customers.clear();
 		PreparedStatement preparedStatement = null;
@@ -135,6 +167,10 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Sets user information parameters.
+	 * @throws SQLException
+	 */
 	public void populateUserData() throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -161,6 +197,17 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Allows new customers to be registered to the user.
+	 * @param lname
+	 * @param fname
+	 * @param phoneNum
+	 * @param email
+	 * @param address
+	 * @param investAmount
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean registerCustomer(String lname, String fname, String phoneNum, String email, String address, double investAmount) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT INTO client (id, last_name, first_name, phone_num, email, address, cash) VALUES (?,?,?,?,?,?,?)";
@@ -198,6 +245,12 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Helper with giving customer registration.
+	 * @param key
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean insertRelationship(int key) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT INTO relationship (broker_id,client_id) VALUES (?,?)";
@@ -219,6 +272,12 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Checks for customer key validness.
+	 * @param key
+	 * @return
+	 * @throws SQLException
+	 */
 	private boolean isKeyUsed(int key) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String query =  "SELECT EXISTS(SELECT 1 FROM client WHERE id=? LIMIT 1)";
@@ -246,6 +305,11 @@ public class UserModel {
 		}
 	}
 	
+	/**
+	 * Allows customer to be deleted from user account.
+	 * @param client_id
+	 * @return
+	 */
 	public boolean deleteClient(int client_id) {
 		PreparedStatement ps = null;
 		String query = "DELETE FROM client WHERE id = ?";
@@ -261,10 +325,18 @@ public class UserModel {
 		return false;
 	}
 	
+	/**
+	 * Returns a valid key.
+	 * @return
+	 */
 	private int generateCustomerKey() {
 		return ThreadLocalRandom.current().nextInt(10000, 100000);
 	}
 	
+	/**
+	 * Returns the users customers.
+	 * @return
+	 */
 	public ArrayList<Customer> getCustomers() {
 		try {
 			this.populateCustomers();
@@ -274,30 +346,58 @@ public class UserModel {
 		return customers;
 	}
 	
+	/**
+	 * Returns user id.
+	 * @return
+	 */
 	public int getUserId() {
 		return userId;
 	}
 	
+	/**
+	 * Returns user's username.
+	 * @return
+	 */
 	public String getUserName() {
 		return userName;
 	}
 	
+	/**
+	 * Returns user's first name.
+	 * @return
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 	
+	/**
+	 * Returns user's last name.
+	 * @return
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 	
+	/**
+	 * Returns users phone number.
+	 * @return
+	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	
+	/**
+	 * Returns user's address.
+	 * @return
+	 */
 	public String getAddress() {
 		return address;
 	}
 	
+	/**
+	 * Returns user's email.
+	 * @return
+	 */
 	public String getEmail() {
 		return email;
 	}
