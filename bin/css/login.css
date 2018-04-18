@@ -1,3 +1,9 @@
+/**
+ * @author Bobby Palmer, Samnang Pann
+ * Login default CSS
+ */
+ 
+
 .root {
 	-fx-background-image:url('/img/banner.jpg');
 }

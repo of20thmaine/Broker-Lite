@@ -48,7 +48,7 @@
                         </Menu>
                       <Menu mnemonicParsing="false" text="Help">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
+                          <MenuItem mnemonicParsing="false" onAction="#showAboutPage" text="About" />
                         </items>
                       </Menu>
                     </menus>
@@ -62,6 +62,7 @@
                      </padding>
                   </Label>
                   <Button id="log-out" maxHeight="-Infinity" mnemonicParsing="false" onAction="#userSignOut" prefHeight="39.0" prefWidth="129.0" text="Log Out" textFill="WHITE" HBox.hgrow="NEVER" />
+                  <Pane id="logout-buffer" prefHeight="38.0" prefWidth="10.0" HBox.hgrow="NEVER" />
                </children>
             </HBox>
          </top>
@@ -87,11 +88,16 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="isConnected" prefHeight="26.0" prefWidth="227.0" text="Connection" textFill="WHITE">
+                  <Label fx:id="isConnected" prefHeight="26.0" prefWidth="178.0" text="Connection" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Pane fx:id="pbPane" prefHeight="26.0" prefWidth="229.0">
+                     <children>
+                        <ProgressBar fx:id="pb" layoutX="37.0" layoutY="7.0" prefHeight="13.0" prefWidth="126.0" progress="0.0" />
+                     </children>
+                  </Pane>
                </children>
             </HBox>
          </bottom>

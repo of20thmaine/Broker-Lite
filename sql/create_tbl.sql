@@ -57,6 +57,7 @@ CREATE TABLE stock_owned (
     client_id INTEGER NOT NULL,
     stock_name TEXT NOT NULL,
     shares INTEGER NOT NULL,
+	PRIMARY KEY (client_id, stock_name),
     FOREIGN KEY (client_id) REFERENCES client(id) on DELETE CASCADE,
     FOREIGN KEY (stock_name) REFERENCES stock(name) ON DELETE CASCADE
 );
